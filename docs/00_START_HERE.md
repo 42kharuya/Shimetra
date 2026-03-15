@@ -10,11 +10,11 @@
 
 | ファイル                                                                                     | いつ使う            | 何をする（最低限）                                                |
 | -------------------------------------------------------------------------------------------- | ------------------- | ----------------------------------------------------------------- |
-| [PRD_TEMPLATE.md](PRD_TEMPLATE.md)                                                           | Day 1               | MVP（Must/Won’t）・KPI・Kill criteria を1枚で確定                 |
+| [PRD.md](PRD.md)                                                                             | Day 1               | MVP（Must/Won’t）・KPI・Kill criteria を1枚で確定                 |
 | [architecture.md](architecture.md)                                                           | Day 1〜2            | 画面/データ/主要リスクだけ決めてADRに残す                         |
 | [TECH_STACK_DECISION.md](TECH_STACK_DECISION.md)                                             | 迷ったとき          | 技術選定を止めずに決める（枯れたデフォルト）                      |
 | [MVP_BACKLOG_TEMPLATE.md](MVP_BACKLOG_TEMPLATE.md)                                           | Day 2               | PRDのMustを 10〜20 Issue に分割（1 Issue=半日以内）               |
-| [ANALYTICS_SPEC_TEMPLATE.md](ANALYTICS_SPEC_TEMPLATE.md)                                     | Day 2               | `signup/activation/purchase` のイベント名・プロパティ・KPI を定義 |
+| [ANALYTICS_SPEC.md](ANALYTICS_SPEC.md)                                                       | Day 2               | `signup/activation/purchase` のイベント名・プロパティ・KPI を定義 |
 | [development.md](development.md)                                                             | Week 1〜            | Done定義/ブランチ/環境変数など、日々の開発ルールを揃える          |
 | [DEPLOYMENT_GUIDE.md](DEPLOYMENT_GUIDE.md)                                                   | Week 2〜3           | 本番への出し方・環境変数・ロールバック方針を決める                |
 | [LAUNCH_CHECKLIST.md](LAUNCH_CHECKLIST.md)                                                   | Week 2〜3           | ローンチ前の抜け漏れを潰す（法務/計測/運用/マーケ）               |
@@ -39,7 +39,7 @@
 
 このフェーズで使うドキュメント（最低限）:
 
-- [docs/PRD_TEMPLATE.md](PRD_TEMPLATE.md): Must/Won’t/KPI/Kill criteria まで埋める
+- [docs/PRD.md](PRD.md): Must/Won’t/KPI/Kill criteria まで埋める
 - [docs/architecture.md](architecture.md): 画面/データ/主要リスクだけ決めてADR 0001として残す
 - [docs/MVP_BACKLOG_TEMPLATE.md](MVP_BACKLOG_TEMPLATE.md): Mustを10〜20 Issueに分割（1 Issue=半日以内）
 
@@ -49,7 +49,7 @@
 - 計測が曖昧: [docs/ANALYTICS_SPEC_TEMPLATE.md](ANALYTICS_SPEC_TEMPLATE.md) に `signup/activation/purchase` だけ先に定義
 - 環境変数が不安: [../.env.example](../.env.example) を埋めて「何が必要か」を見える化
 
-1. [docs/PRD_TEMPLATE.md](PRD_TEMPLATE.md) を埋める（MVP / Won’t / KPI / Kill criteria まで）
+1. [docs/PRD.md](PRD.md) を埋める（MVP / Won’t / KPI / Kill criteria まで）
 2. [docs/architecture.md](architecture.md) に「最小設計」を1つだけ残す（ADR 0001）
 3. [docs/MVP_BACKLOG_TEMPLATE.md](MVP_BACKLOG_TEMPLATE.md) を見ながら Issue を10〜20個に切る
 
@@ -64,7 +64,7 @@
 
 ## 1) 企画（Day 1）
 
-編集: [docs/PRD_TEMPLATE.md](PRD_TEMPLATE.md)
+編集: [docs/PRD.md](PRD.md)
 
 このフェーズでやること（最低限）:
 
