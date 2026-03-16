@@ -30,6 +30,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { getStripe } from "@/lib/stripe";
 import { upsertSubscription } from "@/lib/stripe/webhook";
+import { trackEvent } from "@/lib/analytics";
 import type Stripe from "stripe";
 
 function getWebhookSecret(): string {
@@ -81,7 +82,22 @@ export async function POST(req: NextRequest) {
       case "customer.subscription.updated":
       case "customer.subscription.deleted": {
         const subscription = event.data.object as Stripe.Subscription;
-        await upsertSubscription(subscription);
+        const result = await upsertSubscription(subscription);
+
+        // purchase: 新規サブスクが作成されたとき（初回課金確定）に限り1回送信
+        // PIIを含めない（amount/currency は固定値）
+        if (
+          event.type === "customer.subscription.created" &&
+          result?.plan === "pro"
+        ) {
+          await trackEvent({
+            name: "purchase",
+            userId: result.userId,
+            plan: "pro_monthly",
+            amount: 980,
+            currency: "JPY",
+          });
+        }
         break;
       }
       default:

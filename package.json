@@ -11,6 +11,7 @@
     "db:migrate": "prisma migrate dev",
     "db:migrate:deploy": "prisma migrate deploy",
     "db:studio": "prisma studio",
+    "test:analytics": "npx tsx src/lib/analytics/__tests__/analytics.test.ts",
     "test:mailer": "npx tsx src/lib/mailer/__tests__/sendEmail.test.ts",
     "test:auth": "npx tsx src/lib/auth/__tests__/auth.test.ts",
     "test:deadlines": "npx tsx src/lib/deadlines/__tests__/deadlines.test.ts",
