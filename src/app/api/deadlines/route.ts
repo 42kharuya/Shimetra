@@ -39,9 +39,6 @@ import { prisma } from "@/lib/prisma";
 import { validateCreateDeadline } from "@/lib/deadlines/validate";
 import { FREE_ITEM_LIMIT, isProUser } from "@/lib/deadlines/gate";
 
-// FREE_ITEM_LIMIT と isProUser は gate.ts からエクスポートして再エクスポート
-export { FREE_ITEM_LIMIT };
-
 export async function POST(req: NextRequest) {
   try {
     // 1. 認証確認

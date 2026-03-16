@@ -103,6 +103,7 @@ export default function DeadlineForm() {
   }
 
   const isSubmitting = status === "submitting";
+  const isLimitExceeded = status === "limit_exceeded";
 
   return (
     <form onSubmit={handleSubmit} noValidate className="mt-6 space-y-6">
@@ -292,10 +293,10 @@ export default function DeadlineForm() {
       <div className="flex items-center gap-4">
         <button
           type="submit"
-          disabled={isSubmitting}
+          disabled={isSubmitting || isLimitExceeded}
           className="rounded-lg bg-blue-600 px-6 py-2 text-sm font-semibold text-white hover:bg-blue-700 disabled:cursor-not-allowed disabled:opacity-50"
         >
-          {isSubmitting ? "保存中..." : "作成する"}
+          {isSubmitting ? "保存中..." : isLimitExceeded ? "上限に達しています" : "作成する"}
         </button>
         <Link
           href="/dashboard"
