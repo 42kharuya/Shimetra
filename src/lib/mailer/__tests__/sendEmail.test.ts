@@ -59,6 +59,18 @@ async function runAll() {
     assert.equal(result.ok, false);
   });
 
+  // resendプロバイダ: RESEND_API_KEY 未設定
+  await test("resend: RESEND_API_KEY 未設定で ok:false を返す", async () => {
+    process.env.EMAIL_PROVIDER = "resend";
+    const prev = process.env.RESEND_API_KEY;
+    delete process.env.RESEND_API_KEY;
+    delete process.env.EMAIL_FROM;
+    const result = await sendEmail(payload);
+    assert.equal(result.ok, false);
+    if (!result.ok) assert.ok(result.error.includes("RESEND_API_KEY"));
+    process.env.RESEND_API_KEY = prev;
+  });
+
   console.log(`\n${passed} passed, ${failed} failed\n`);
   if (failed > 0) process.exit(1);
 }

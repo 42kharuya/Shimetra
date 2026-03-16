@@ -11,7 +11,7 @@
     "db:migrate": "prisma migrate dev",
     "db:migrate:deploy": "prisma migrate deploy",
     "db:studio": "prisma studio",
-    "test:mailer": "tsx src/lib/mailer/__tests__/sendEmail.test.ts"
+    "test:mailer": "npx tsx src/lib/mailer/__tests__/sendEmail.test.ts"
   },
   "dependencies": {
     "@prisma/client": "^7.5.0",
