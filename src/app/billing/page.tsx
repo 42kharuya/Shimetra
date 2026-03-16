@@ -1,23 +1,13 @@
 import { redirect } from "next/navigation";
 import { getSession } from "@/lib/auth/session";
-import { prisma } from "@/lib/prisma";
+import { getUserPlan } from "@/lib/deadlines/gate";
 import { UpgradeButton } from "./UpgradeButton";
-
-/** Pro 判定: plan = "pro" かつ active/trialing または current_period_end が未来 */
-async function getPlan(userId: string): Promise<"free" | "pro"> {
-  const sub = await prisma.subscription.findUnique({ where: { userId } });
-  if (!sub || sub.plan !== "pro") return "free";
-  const activeStatus = sub.status === "active" || sub.status === "trialing";
-  const periodValid =
-    sub.currentPeriodEnd !== null && sub.currentPeriodEnd > new Date();
-  return activeStatus || periodValid ? "pro" : "free";
-}
 
 export default async function BillingPage() {
   const session = await getSession();
   if (!session) redirect("/login");
 
-  const plan = await getPlan(session.sub);
+  const plan = await getUserPlan(session.sub);
 
   return (
     <main className="mx-auto max-w-2xl p-6">

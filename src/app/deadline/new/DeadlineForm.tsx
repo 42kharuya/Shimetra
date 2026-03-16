@@ -7,7 +7,7 @@ import { KIND_LABEL } from "@/lib/deadlines/format";
 
 type FieldErrors = Record<string, string>;
 
-type Status = "idle" | "submitting" | "error";
+type Status = "idle" | "submitting" | "error" | "limit_exceeded";
 
 const KIND_OPTIONS = Object.entries(KIND_LABEL) as [string, string][];
 
@@ -23,6 +23,7 @@ export default function DeadlineForm() {
   const [status, setStatus] = useState<Status>("idle");
   const [fieldErrors, setFieldErrors] = useState<FieldErrors>({});
   const [globalError, setGlobalError] = useState("");
+  const [limitExceeded, setLimitExceeded] = useState(false);
 
   /** クライアント側の必須チェック（送信前バリデーション） */
   function validate(): FieldErrors {
@@ -36,6 +37,7 @@ export default function DeadlineForm() {
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
     setGlobalError("");
+    setLimitExceeded(false);
 
     // 1. クライアント側バリデーション
     const clientErrors = validate();
@@ -81,10 +83,13 @@ export default function DeadlineForm() {
         }
         setFieldErrors(errs);
         setStatus("error");
+      } else if (res.status === 403 && data.code === "FREE_LIMIT_EXCEEDED") {
+        setLimitExceeded(true);
+        setStatus("limit_exceeded");
       } else if (res.status === 403) {
         setGlobalError(
           data.error ??
-            "Free プランの登録上限（10件）に達しました。Pro にアップグレードしてください。",
+            "この操作は許可されていません。",
         );
         setStatus("error");
       } else {
@@ -101,6 +106,26 @@ export default function DeadlineForm() {
 
   return (
     <form onSubmit={handleSubmit} noValidate className="mt-6 space-y-6">
+      {/* Free 枠上限エラー（/billing への誘導リンク付き） */}
+      {limitExceeded && (
+        <div
+          role="alert"
+          className="rounded-lg border border-amber-200 bg-amber-50 px-4 py-3 text-sm text-amber-800"
+        >
+          <p className="font-semibold">Free プランの登録上限（10件）に達しました</p>
+          <p className="mt-1">
+            Pro にアップグレードすると締切アイテムが{" "}
+            <strong>無制限</strong>になります。
+          </p>
+          <Link
+            href="/billing"
+            className="mt-2 inline-block rounded-md bg-amber-600 px-4 py-1.5 text-sm font-semibold text-white hover:bg-amber-700 focus:outline-none focus:ring-2 focus:ring-amber-500 focus:ring-offset-1"
+          >
+            Pro にアップグレード →
+          </Link>
+        </div>
+      )}
+
       {/* グローバルエラー */}
       {globalError && (
         <p
