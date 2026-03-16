@@ -15,12 +15,20 @@
  *
  * レスポンス:
  *  - { ok: true, url: string }  200  Stripe Checkout URL
- *  - { error: string }          401 / 500
+ *  - { error: string }          401 / 405 / 500
  */
 import { NextRequest, NextResponse } from "next/server";
 import { getSession } from "@/lib/auth/session";
 import { getStripe } from "@/lib/stripe";
 import { prisma } from "@/lib/prisma";
+
+/** GET は許可しない（ブラウザで直接開いた場合に分かりやすいエラーを返す） */
+export function GET() {
+  return NextResponse.json(
+    { error: "このエンドポイントは POST のみ受け付けます。/billing からアップグレードしてください。" },
+    { status: 405 },
+  );
+}
 
 function getRequiredEnv(key: string): string {
   const value = process.env[key];
