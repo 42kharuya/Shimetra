@@ -4,6 +4,7 @@
 
 ## Unreleased
 
+- feat: `POST /api/cron/notify` を追加（CRON_SECRET 保護・締切前メール通知 Free=24h/Pro=72h/24h/3h・notification_deliveries の冪等 upsert で重複防止・成否で sent/failed 更新）
 - feat: `POST /api/stripe/portal` を追加（Stripe Customer Portal Session 作成・解約/支払い方法変更を委譲）、`/billing` にProユーザー向け「管理画面へ」ボタンを追加
 - feat: `/billing/success` と `/billing/cancel` の着地ページを整備（Pro有効化メッセージ・/dashboard 導線 / キャンセルメッセージ・/billing 導線）
 - feat: Pro/Free 機能ゲートを追加（Free 10件超の作成をサーバー側でブロック・/billing への誘導UI・ダッシュボード上限バナー・isProUser を gate.ts に共通化）
