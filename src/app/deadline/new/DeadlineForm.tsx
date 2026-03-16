@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
+import Link from "next/link";
 import { KIND_LABEL } from "@/lib/deadlines/format";
 
 type FieldErrors = Record<string, string>;
@@ -55,7 +56,9 @@ export default function DeadlineForm() {
         body: JSON.stringify({
           company_name: companyName.trim(),
           kind,
-          deadline_at: deadlineAt, // "YYYY-MM-DDTHH:MM" をそのまま渡す（Date として有効）
+          // datetime-local は TZ なしで返るため +09:00 を付与して JST を明示する
+          // （サーバーが UTC 環境でも正しい時刻で保存される）
+          deadline_at: deadlineAt ? deadlineAt + "+09:00" : "",
           link: link.trim() || undefined,
           memo: memo.trim() || undefined,
         }),
@@ -269,12 +272,12 @@ export default function DeadlineForm() {
         >
           {isSubmitting ? "保存中..." : "作成する"}
         </button>
-        <a
+        <Link
           href="/dashboard"
           className="text-sm text-slate-500 underline hover:text-slate-700"
         >
           キャンセル
-        </a>
+        </Link>
       </div>
     </form>
   );
