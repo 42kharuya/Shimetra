@@ -141,8 +141,8 @@
 
 - 目的: Stripeリダイレクト後の迷子を防ぐ
 - AC:
-  - [ ] success で「Pro有効化中/完了」メッセージと /dashboard 導線がある
-  - [ ] cancel で「課金キャンセル」メッセージと /billing 導線がある
+  - [x] success で「Pro有効化中/完了」メッセージと /dashboard 導線がある
+  - [x] cancel で「課金キャンセル」メッセージと /billing 導線がある
 - 優先度: P1
 - 依存関係: #10
 - 推定: S
