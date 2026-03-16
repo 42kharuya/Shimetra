@@ -20,7 +20,7 @@ CREATE TYPE "NotificationStatus" AS ENUM ('scheduled', 'sent', 'failed');
 CREATE TABLE "users" (
     "id" UUID NOT NULL,
     "email" TEXT NOT NULL,
-    "created_at" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "created_at" TIMESTAMPTZ NOT NULL DEFAULT CURRENT_TIMESTAMP,
 
     CONSTRAINT "users_pkey" PRIMARY KEY ("id")
 );
@@ -36,8 +36,8 @@ CREATE TABLE "deadline_items" (
     "link" TEXT,
     "memo" TEXT,
     "status_changed_at" TIMESTAMPTZ,
-    "created_at" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    "updated_at" TIMESTAMP(3) NOT NULL,
+    "created_at" TIMESTAMPTZ NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "updated_at" TIMESTAMPTZ NOT NULL,
 
     CONSTRAINT "deadline_items_pkey" PRIMARY KEY ("id")
 );
@@ -51,7 +51,7 @@ CREATE TABLE "subscriptions" (
     "status" TEXT NOT NULL,
     "plan" "SubscriptionPlan" NOT NULL DEFAULT 'free',
     "current_period_end" TIMESTAMPTZ,
-    "updated_at" TIMESTAMP(3) NOT NULL,
+    "updated_at" TIMESTAMPTZ NOT NULL,
 
     CONSTRAINT "subscriptions_pkey" PRIMARY KEY ("id")
 );
@@ -66,7 +66,7 @@ CREATE TABLE "notification_deliveries" (
     "provider_message_id" TEXT,
     "status" "NotificationStatus" NOT NULL DEFAULT 'scheduled',
     "error" TEXT,
-    "created_at" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "created_at" TIMESTAMPTZ NOT NULL DEFAULT CURRENT_TIMESTAMP,
 
     CONSTRAINT "notification_deliveries_pkey" PRIMARY KEY ("id")
 );

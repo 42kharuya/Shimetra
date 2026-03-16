@@ -51,7 +51,7 @@ enum NotificationStatus {
 model User {
   id        String   @id @default(uuid()) @db.Uuid
   email     String   @unique
-  createdAt DateTime @default(now()) @map("created_at")
+  createdAt DateTime @default(now()) @map("created_at") @db.Timestamptz
 
   deadlineItems  DeadlineItem[]
   subscription   Subscription?
@@ -69,8 +69,8 @@ model DeadlineItem {
   link            String?
   memo            String?
   statusChangedAt DateTime?      @map("status_changed_at") @db.Timestamptz
-  createdAt       DateTime       @default(now()) @map("created_at")
-  updatedAt       DateTime       @updatedAt @map("updated_at")
+  createdAt       DateTime       @default(now()) @map("created_at") @db.Timestamptz
+  updatedAt       DateTime       @updatedAt @map("updated_at") @db.Timestamptz
 
   user                  User                   @relation(fields: [userId], references: [id], onDelete: Cascade)
   notificationDeliveries NotificationDelivery[]
@@ -89,7 +89,7 @@ model Subscription {
   status               String
   plan                 SubscriptionPlan @default(free)
   currentPeriodEnd     DateTime?        @map("current_period_end") @db.Timestamptz
-  updatedAt            DateTime         @updatedAt @map("updated_at")
+  updatedAt            DateTime         @updatedAt @map("updated_at") @db.Timestamptz
 
   user User @relation(fields: [userId], references: [id], onDelete: Cascade)
 
@@ -105,7 +105,7 @@ model NotificationDelivery {
   providerMessageId String?            @map("provider_message_id")
   status            NotificationStatus @default(scheduled)
   error             String?
-  createdAt         DateTime           @default(now()) @map("created_at")
+  createdAt         DateTime           @default(now()) @map("created_at") @db.Timestamptz
 
   deadlineItem DeadlineItem @relation(fields: [deadlineItemId], references: [id], onDelete: Cascade)
 
