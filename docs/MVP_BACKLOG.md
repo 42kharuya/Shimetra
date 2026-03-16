@@ -68,9 +68,9 @@
 
 - 目的: ステータス更新と編集/削除を可能にする
 - AC:
-  - [ ] `PATCH /api/deadlines/:id` で status 更新できる
-  - [ ] status を `submitted` にした時だけ `status_changed_at` が設定される
-  - [ ] `DELETE /api/deadlines/:id` がユーザースコープで動く
+  - [x] `PATCH /api/deadlines/:id` で status 更新できる
+  - [x] status を `submitted` にした時だけ `status_changed_at` が設定される
+  - [x] `DELETE /api/deadlines/:id` がユーザースコープで動く
 - 優先度: P0
 - 依存関係: #2, #3
 - 推定: M
