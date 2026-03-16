@@ -4,6 +4,7 @@
 
 ## Unreleased
 
+- feat: LP（/）実装（価値提案・Free/Pro差分・価格 980円/月・CTA → /login）
 - feat: `PATCH /api/deadlines/:id` を追加（ステータス更新・部分更新、submitted 時のみ status_changed_at を設定、ユーザースコープ保証）
 - feat: `DELETE /api/deadlines/:id` を追加（ログインユーザーの自分のアイテムのみ削除可）
 - feat: `GET /api/deadlines` を追加（締切アイテム一覧取得API、deadline_at 昇順・ログインユーザーのみ返却）
