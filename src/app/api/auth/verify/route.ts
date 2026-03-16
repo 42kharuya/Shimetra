@@ -11,6 +11,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { consumeMagicLinkToken } from "@/lib/auth/token";
 import { createSessionToken, sessionCookieOptions } from "@/lib/auth/session";
 import { prisma } from "@/lib/prisma";
+import { trackEvent } from "@/lib/analytics";
 
 export async function GET(req: NextRequest) {
   // コピー時の末尾 \ 等の非hex文字を除去するサニタイズ
@@ -39,11 +40,23 @@ export async function GET(req: NextRequest) {
 
   try {
     // Signup確定: メール確認完了をもってユーザーを作成する（既存なら取得のみ）
+    // 新規作成か既存かを判定するため、upsert 前に存在確認する
+    const existingUser = await prisma.user.findUnique({ where: { email } });
+
     const user = await prisma.user.upsert({
       where: { email },
       update: {},
       create: { email },
     });
+
+    // 新規ユーザーのみ signup イベントを送信（既存ユーザーの再ログインは除く）
+    if (!existingUser) {
+      await trackEvent({
+        name: "signup",
+        userId: user.id,
+        method: "email_magic_link",
+      });
+    }
 
     const sessionToken = await createSessionToken({
       sub: user.id,

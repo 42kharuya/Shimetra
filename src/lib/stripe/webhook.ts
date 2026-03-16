@@ -27,16 +27,24 @@ export function resolveSubscriptionPlan(
   return "free";
 }
 
+/** upsertSubscription の戻り値 */
+export interface UpsertSubscriptionResult {
+  userId: string;
+  plan: "free" | "pro";
+}
+
 /**
  * Stripe の Subscription オブジェクトを subscriptions テーブルへ冪等に upsert する。
  *
  * upsert キー: stripe_subscription_id（Stripe側でユニーク）
  * userId は subscription.metadata.userId（Checkout Session 作成時に埋め込み）から取得。
  * userId が存在しない場合は処理をスキップし、エラーをログに残す。
+ *
+ * @returns upsert 結果（userId と plan）。userId が存在しない場合は null を返す。
  */
 export async function upsertSubscription(
   subscription: Stripe.Subscription,
-): Promise<void> {
+): Promise<UpsertSubscriptionResult | null> {
   // metadata.userId は Checkout Session 作成時に埋め込む（checkout/route.ts 参照）
   const userId = subscription.metadata?.userId;
   if (!userId) {
@@ -44,7 +52,7 @@ export async function upsertSubscription(
       "[webhook] upsertSubscription: userId not found in metadata. subscriptionId=%s",
       subscription.id,
     );
-    return;
+    return null;
   }
 
   const stripeCustomerId =
@@ -86,4 +94,6 @@ export async function upsertSubscription(
     subscription.status,
     plan,
   );
+
+  return { userId, plan };
 }

@@ -4,6 +4,7 @@ import { getSession } from "@/lib/auth/session";
 import { prisma } from "@/lib/prisma";
 import DeadlineList, { type DeadlineItem } from "./DeadlineList";
 import { FREE_ITEM_LIMIT, isProUser } from "@/lib/deadlines/gate";
+import { trackEvent } from "@/lib/analytics";
 
 /**
  * /dashboard – Server Component
@@ -18,7 +19,10 @@ export default async function DashboardPage() {
     redirect("/login");
   }
 
-  // 2. ログインユーザーのアイテムを deadline_at 昇順で取得 & Pro 判定を並列実行
+  // 2. ダッシュボード表示の計測（重複は集計側で吸収する設計）
+  void trackEvent({ name: "dashboard_viewed", userId: session.sub });
+
+  // 3. ログインユーザーのアイテムを deadline_at 昇順で取得 & Pro 判定を並列実行
   const [rows, pro] = await Promise.all([
     prisma.deadlineItem.findMany({
       where: { userId: session.sub },
@@ -36,7 +40,7 @@ export default async function DashboardPage() {
     isProUser(session.sub),
   ]);
 
-  // 3. Date → ISO string に変換（Client Component へのシリアライズ要件）
+  // 4. Date → ISO string に変換（Client Component へのシリアライズ要件）
   const items: DeadlineItem[] = rows.map((row) => ({
     ...row,
     deadlineAt: row.deadlineAt.toISOString(),
