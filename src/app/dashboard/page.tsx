@@ -3,6 +3,7 @@ import Link from "next/link";
 import { getSession } from "@/lib/auth/session";
 import { prisma } from "@/lib/prisma";
 import DeadlineList, { type DeadlineItem } from "./DeadlineList";
+import { FREE_ITEM_LIMIT, isProUser } from "@/lib/deadlines/gate";
 
 /**
  * /dashboard – Server Component
@@ -17,26 +18,32 @@ export default async function DashboardPage() {
     redirect("/login");
   }
 
-  // 2. ログインユーザーのアイテムを deadline_at 昇順で取得
-  const rows = await prisma.deadlineItem.findMany({
-    where: { userId: session.sub },
-    orderBy: { deadlineAt: "asc" },
-    select: {
-      id: true,
-      companyName: true,
-      kind: true,
-      deadlineAt: true,
-      status: true,
-      link: true,
-      memo: true,
-    },
-  });
+  // 2. ログインユーザーのアイテムを deadline_at 昇順で取得 & Pro 判定を並列実行
+  const [rows, pro] = await Promise.all([
+    prisma.deadlineItem.findMany({
+      where: { userId: session.sub },
+      orderBy: { deadlineAt: "asc" },
+      select: {
+        id: true,
+        companyName: true,
+        kind: true,
+        deadlineAt: true,
+        status: true,
+        link: true,
+        memo: true,
+      },
+    }),
+    isProUser(session.sub),
+  ]);
 
   // 3. Date → ISO string に変換（Client Component へのシリアライズ要件）
   const items: DeadlineItem[] = rows.map((row) => ({
     ...row,
     deadlineAt: row.deadlineAt.toISOString(),
   }));
+
+  // Free ユーザーが上限に達しているか
+  const isAtFreeLimit = !pro && items.length >= FREE_ITEM_LIMIT;
 
   return (
     <main className="mx-auto max-w-3xl p-6">
@@ -50,6 +57,22 @@ export default async function DashboardPage() {
           + 締切を追加
         </Link>
       </div>
+
+      {/* Free 枠上限バナー */}
+      {isAtFreeLimit && (
+        <div className="mt-4 flex items-center justify-between rounded-lg border border-amber-200 bg-amber-50 px-4 py-3 text-sm">
+          <p className="text-amber-800">
+            <span className="font-semibold">Free プランの上限（{FREE_ITEM_LIMIT}件）に達しています。</span>
+            {"　"}新しい締切を追加するには Pro へのアップグレードが必要です。
+          </p>
+          <Link
+            href="/billing"
+            className="ml-4 shrink-0 rounded-md bg-amber-600 px-3 py-1.5 text-xs font-semibold text-white hover:bg-amber-700 focus:outline-none focus:ring-2 focus:ring-amber-500 focus:ring-offset-1"
+          >
+            Pro にアップグレード
+          </Link>
+        </div>
+      )}
 
       {/* 締切一覧（クライアントコンポーネント） */}
       <DeadlineList initialItems={items} />

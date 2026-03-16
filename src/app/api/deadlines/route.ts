@@ -37,23 +37,10 @@ import { NextRequest, NextResponse } from "next/server";
 import { getSession } from "@/lib/auth/session";
 import { prisma } from "@/lib/prisma";
 import { validateCreateDeadline } from "@/lib/deadlines/validate";
+import { FREE_ITEM_LIMIT, isProUser } from "@/lib/deadlines/gate";
 
-/** Free ユーザーが作成できる最大件数 */
-export const FREE_ITEM_LIMIT = 10;
-
-/**
- * subscriptions レコードを見て Pro か判定する。
- * Pro 判定: plan = "pro" かつ (status = "active" | "trialing" または current_period_end が未来)
- */
-async function isProUser(userId: string): Promise<boolean> {
-  const sub = await prisma.subscription.findUnique({ where: { userId } });
-  if (!sub || sub.plan !== "pro") return false;
-  const activeStatus =
-    sub.status === "active" || sub.status === "trialing";
-  const periodValid =
-    sub.currentPeriodEnd !== null && sub.currentPeriodEnd > new Date();
-  return activeStatus || periodValid;
-}
+// FREE_ITEM_LIMIT と isProUser は gate.ts からエクスポートして再エクスポート
+export { FREE_ITEM_LIMIT };
 
 export async function POST(req: NextRequest) {
   try {

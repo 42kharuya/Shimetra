@@ -4,6 +4,7 @@
 
 ## Unreleased
 
+- feat: Pro/Free 機能ゲートを追加（Free 10件超の作成をサーバー側でブロック・/billing への誘導UI・ダッシュボード上限バナー・isProUser を gate.ts に共通化）
 - feat: `POST /api/stripe/webhook` を追加（Stripe 署名検証・subscriptions 冪等 upsert・Pro 判定ルール反映）
 - feat: `POST /api/stripe/checkout` を追加（Stripe Checkout Session 作成・Pro アップグレード導線）
 - feat: `/billing` に Free/Pro 差分テーブルと Upgrade CTA を追加（非ログイン時は /login へリダイレクト）
