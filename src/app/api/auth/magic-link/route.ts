@@ -5,7 +5,6 @@
  * - 常に 200 を返す（メール存在有無を漏らさないため）
  * - バリデーション失敗時のみ 400 を返す
  */
-export const runtime = "edge";
 
 import { NextRequest, NextResponse } from "next/server";
 import { createMagicLinkToken } from "@/lib/auth/token";

@@ -27,7 +27,6 @@
  *  - { error: string }    400  署名検証失敗
  *  - { error: string }    500  サーバーエラー
  */
-export const runtime = "edge";
 
 import { NextRequest, NextResponse } from "next/server";
 import { getStripe } from "@/lib/stripe";

@@ -6,7 +6,7 @@
  * - 使い捨て: 一度使われたトークンは再利用不可
  * - 同一メールの期限切れトークンは作成時にクリーンアップ
  */
-import { randomBytes } from "crypto";
+import { randomBytes } from "node:crypto";
 import { prisma } from "@/lib/prisma";
 
 const EXPIRY_MINUTES = parseInt(
