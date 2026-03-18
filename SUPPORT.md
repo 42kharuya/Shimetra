@@ -1,8 +1,29 @@
 # Support
 
-このリポジトリはテンプレートです。サポート窓口は派生リポジトリ側で運用してください。
+## お問い合わせ窓口
 
-- 質問: Discussions（有効化する場合）
-- 不具合: Issues（テンプレ: [.github/ISSUE_TEMPLATE/](.github/ISSUE_TEMPLATE/)）
-- セキュリティ: [SECURITY.md](SECURITY.md)
-- 問い合わせ運用の型: [docs/CUSTOMER_SUPPORT_PLAYBOOK.md](docs/CUSTOMER_SUPPORT_PLAYBOOK.md)
+| 種別 | 窓口 | 目標応答時間 |
+|------|------|-------------|
+| 機能の質問 / 使い方 | [GitHub Discussions](../../discussions)（有効化している場合） | 3 営業日以内 |
+| 不具合報告 | [GitHub Issues](.github/ISSUE_TEMPLATE/) | 2 営業日以内 |
+| セキュリティ脆弱性 | [SECURITY.md](SECURITY.md)（非公開連絡） | 2 営業日以内に受領連絡 |
+| データ削除依頼 | kharuya.0411.k@gmail.com（件名:「データ削除依頼」） | 5 営業日以内 |
+| 課金・請求に関する問い合わせ | kharuya.0411.k@gmail.com（件名:「課金について」） | 2 営業日以内 |
+
+## よくある質問（FAQ）
+
+**Q. マジックリンクのメールが届かない**
+A. 迷惑メールフォルダをご確認ください。それでも届かない場合は再送をお試しください。
+
+**Q. 締切が 10 件を超えて登録できない**
+A. 無料プランの上限（10 件）に達しています。Pro プランへのアップグレードで無制限になります。
+
+**Q. 課金したのにプランが反映されない**
+A. 数分待っても反映されない場合は、ログアウト → 再ログインをお試しください。解消しない場合はご連絡ください。
+
+**Q. アカウントを削除したい**
+A. kharuya.0411.k@gmail.com まで「データ削除依頼」の件名でご連絡ください。登録メールアドレスを本文に記載してください。
+
+## 問い合わせ運用の詳細
+
+詳細なサポート運用フローは [docs/CUSTOMER_SUPPORT_PLAYBOOK.md](docs/CUSTOMER_SUPPORT_PLAYBOOK.md) を参照してください。
