@@ -25,9 +25,9 @@
 
 - 目的: MVPの永続化（users/deadline_items/subscriptions/notification_deliveries）を確定する
 - AC:
-  - [ ] 4テーブル（+必要なenum）とインデックス/一意制約がマイグレーションで反映される
-  - [ ] `notification_deliveries (deadline_item_id, offset_minutes)` に一意制約がある
-  - [ ] `deadline_items (user_id, deadline_at)` 複合インデックスがある
+  - [x] 4テーブル（+必要なenum）とインデックス/一意制約がマイグレーションで反映される
+  - [x] `notification_deliveries (deadline_item_id, offset_minutes)` に一意制約がある
+  - [x] `deadline_items (user_id, deadline_at)` 複合インデックスがある
 - 優先度: P0
 - 依存関係: #1
 - 推定: M
@@ -36,9 +36,9 @@
 
 - 目的: PRDのSignup定義（メール確認完了）を満たす認証導線を作る
 - AC:
-  - [ ] /login でメール入力→マジックリンク送付→クリックでログインできる
-  - [ ] 未ログインで /dashboard 等にアクセスすると /login にリダイレクトされる
-  - [ ] Signup確定タイミング（ユーザー作成確定）がサーバーで定義される
+  - [x] /login でメール入力→マジックリンク送付→クリックでログインできる
+  - [x] 未ログインで /dashboard 等にアクセスすると /login にリダイレクトされる
+  - [x] Signup確定タイミング（ユーザー作成確定）がサーバーで定義される
 - 優先度: P0
 - 依存関係: #1, #2, #16
 - 推定: M
@@ -47,9 +47,9 @@
 
 - 目的: 締切アイテムの登録をサーバー側で堅牢に受ける
 - AC:
-  - [ ] `POST /api/deadlines` が `company_name/kind/deadline_at/status/link/memo` を検証して保存する
-  - [ ] Freeは10件までをサーバー側で enforce（超過時はエラー）
-  - [ ] 作成はログインユーザーにスコープされ、他ユーザーに書き込めない
+  - [x] `POST /api/deadlines` が `company_name/kind/deadline_at/status/link/memo` を検証して保存する
+  - [x] Freeは10件までをサーバー側で enforce（超過時はエラー）
+  - [x] 作成はログインユーザーにスコープされ、他ユーザーに書き込めない
 - 優先度: P0
 - 依存関係: #2, #3
 - 推定: M
@@ -110,8 +110,8 @@
 
 - 目的: Pro購入導線を成立させる
 - AC:
-  - [ ] `POST /api/stripe/checkout` がCheckout Sessionを作成し、Stripeへ遷移できる
-  - [ ] /billing にFree/Pro差分とUpgrade CTAがある
+  - [x] `POST /api/stripe/checkout` がCheckout Sessionを作成し、Stripeへ遷移できる
+  - [x] /billing にFree/Pro差分とUpgrade CTAがある
 - 優先度: P0
 - 依存関係: #1, #3
 - 推定: M
@@ -120,9 +120,9 @@
 
 - 目的: 課金状態をDBに同期し、アプリの権限判定を単純化する
 - AC:
-  - [ ] `POST /api/stripe/webhook` が署名検証を行う
-  - [ ] `subscriptions` が `stripe_subscription_id` 等で冪等に upsert される
-  - [ ] Pro判定ルール（active/trialing または current_period_end未来）を plan に反映できる
+  - [x] `POST /api/stripe/webhook` が署名検証を行う
+  - [x] `subscriptions` が `stripe_subscription_id` 等で冪等に upsert される
+  - [x] Pro判定ルール（active/trialing または current_period_end未来）を plan に反映できる
 - 優先度: P0
 - 依存関係: #2, #10
 - 推定: M
@@ -131,8 +131,8 @@
 
 - 目的: Free枠制限とPro差分が一貫して適用される
 - AC:
-  - [ ] Freeで10件超の作成がブロックされ、/billing へ誘導される
-  - [ ] Proは件数無制限として扱われる
+  - [x] Freeで10件超の作成がブロックされ、/billing へ誘導される
+  - [x] Proは件数無制限として扱われる
 - 優先度: P0
 - 依存関係: #4, #11
 - 推定: S
@@ -151,8 +151,8 @@
 
 - 目的: サブスク運用の最低限（解約/カード変更）をStripeに委譲する
 - AC:
-  - [ ] `POST /api/stripe/portal` がPortal Sessionを作成できる
-  - [ ] /billing から「管理画面へ」導線がある（Proユーザー向け）
+  - [x] `POST /api/stripe/portal` がPortal Sessionを作成できる
+  - [x] /billing から「管理画面へ」導線がある（Proユーザー向け）
 - 優先度: P1
 - 依存関係: #11
 - 推定: S
@@ -161,9 +161,9 @@
 
 - 目的: PRD Must のメール通知（Free=24h, Pro=72h/24h/3h）を信頼性設計込みで実装する
 - AC:
-  - [ ] `POST /api/cron/notify` が `CRON_SECRET` で保護されている
-  - [ ] 対象をウィンドウ抽出し、送信前に `notification_deliveries` を作成（重複防止）する
-  - [ ] 成否で status（sent/failed）と error が更新される
+  - [x] `POST /api/cron/notify` が `CRON_SECRET` で保護されている
+  - [x] 対象をウィンドウ抽出し、送信前に `notification_deliveries` を作成（重複防止）する
+  - [x] 成否で status（sent/failed）と error が更新される
 - 優先度: P0
 - 依存関係: #2, #11, #16
 - 推定: M
@@ -182,10 +182,10 @@
 
 - 目的: PRDのKill criteria判定に必要な最小計測を入れる
 - AC:
-  - [ ] `signup` は「メール確認完了＝ユーザー作成確定」で1回送られる
-  - [ ] `activation` はサーバー側で「24h以内に2件作成」を満たした瞬間に1回だけ送られる
-  - [ ] `dashboard_viewed` はダッシュボード表示時に送られる（重複は集計側で吸収）
-  - [ ] `purchase` はStripe webhook起点で送られる（PIIを含めない）
+  - [x] `signup` は「メール確認完了＝ユーザー作成確定」で1回送られる
+  - [x] `activation` はサーバー側で「24h以内に2件作成」を満たした瞬間に1回だけ送られる
+  - [x] `dashboard_viewed` はダッシュボード表示時に送られる（重複は集計側で吸収）
+  - [x] `purchase` はStripe webhook起点で送られる（PIIを含めない）
 - 優先度: P0
 - 依存関係: #3, #4, #8, #11
 - 推定: M
