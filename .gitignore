@@ -26,3 +26,9 @@ pnpm-debug.log*
 .env
 .env.*
 !.env.example
+
+# Cloudflare / OpenNext build output
+.open-next
+
+# Cloudflare local dev secrets
+.dev.vars

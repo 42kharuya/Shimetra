@@ -7,7 +7,6 @@
  *   ここでユーザーが存在しない場合に upsert する =
  *   「メール確認（マジックリンクのクリック）完了 = ユーザー作成確定」
  */
-export const runtime = "edge";
 
 import { NextRequest, NextResponse } from "next/server";
 import { consumeMagicLinkToken } from "@/lib/auth/token";
