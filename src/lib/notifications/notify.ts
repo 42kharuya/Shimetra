@@ -83,7 +83,7 @@ export function buildNotificationHtml(params: {
 <hr>
 <p style="font-size:12px;color:#888;">
   通知設定の変更は <a href="${appUrl}/billing">こちら</a>。
-  このメールは就活締切トラッカーから自動送信されています。
+  このメールは〆トラから自動送信されています。
 </p>
 `.trim();
   const text = `締切まで${label}です。\n${companyName}（${kindLabel}）の締切: ${deadlineStr} JST\n\nダッシュボード: ${appUrl}/dashboard`;

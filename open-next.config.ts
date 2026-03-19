@@ -5,27 +5,9 @@ import { defineCloudflareConfig } from "@opennextjs/cloudflare";
 // ローカル開発: npm run preview (opennextjs-cloudflare build && opennextjs-cloudflare preview)
 // デプロイ: npm run deploy (opennextjs-cloudflare build && opennextjs-cloudflare deploy)
 // see: https://opennext.js.org/cloudflare/get-started
-export default defineCloudflareConfig({
-  edgeExternals: ["node:crypto"],
-  default: {
-    override: {
-      wrapper: "cloudflare-node",
-      converter: "edge",
-      proxyExternalRequest: "fetch",
-      incrementalCache: "dummy",
-      tagCache: "dummy",
-      queue: "dummy",
-    },
-  },
-  middleware: {
-    external: true,
-    override: {
-      wrapper: "cloudflare-edge",
-      converter: "edge",
-      proxyExternalRequest: "fetch",
-      incrementalCache: "dummy",
-      tagCache: "dummy",
-      queue: "dummy",
-    },
-  },
-});
+//
+// 注: defineCloudflareConfig() は内部で以下を自動設定するため引数不要
+//   - edgeExternals: ["node:crypto"]
+//   - default.override (cloudflare-node wrapper)
+//   - middleware.external: true (cloudflare-edge wrapper)
+export default defineCloudflareConfig();
