@@ -1,4 +1,6 @@
-import { PrismaClient } from "@prisma/client";
+// Cloudflare Workers では WebAssembly が禁止されているため /edge サブパスを使用
+// /edge は Prisma Accelerate（HTTP経由）専用の軽量クライアント（WASM不使用）
+import { PrismaClient } from "@prisma/client/edge";
 import { withAccelerate } from "@prisma/extension-accelerate";
 
 // Cloudflare Edge Runtime 対応: Prisma Accelerate（HTTP経由）を使用
