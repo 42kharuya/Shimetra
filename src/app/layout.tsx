@@ -3,8 +3,8 @@ import Link from "next/link";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "就活締切トラッカー",
-  description: "締切を登録して、締切前にメール通知で出し忘れを防ぐ",
+  title: "〆トラ",
+  description: "締切を登録して、締切前にメール通知で出し忘れを防ぐ就活管理サービス",
 };
 
 export default function RootLayout({
@@ -22,8 +22,11 @@ export default function RootLayout({
             <Link href="/privacy" className="hover:underline">
               プライバシーポリシー
             </Link>
+            <Link href="/legal" className="hover:underline">
+              特定商取引法に基づく表記
+            </Link>
             <a
-              href="mailto:support@example.com"
+              href="mailto:haruya.0411.k@gmail.com"
               className="hover:underline"
             >
               お問い合わせ
