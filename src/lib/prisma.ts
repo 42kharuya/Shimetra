@@ -16,10 +16,10 @@ const globalForPrisma = globalThis as unknown as {
 };
 
 function createPrismaClient() {
-  // /edge クライアントは HTTP 専用（WASM不使用）で process.env.DATABASE_URL を直接読む
-  // withAccelerate() が prisma:// URL を処理して Accelerate 経由で接続する
-  // accelerateUrl オプションは withAccelerate() と競合するため使用しない
-  if (!process.env.DATABASE_URL) {
+  const url = process.env.DATABASE_URL;
+  // デバッグ: DATABASE_URL の先頭10文字だけログ出力（prisma:// で始まるか確認）
+  console.log("[prisma] DATABASE_URL prefix:", url ? url.substring(0, 15) + "..." : "EMPTY/UNDEFINED");
+  if (!url) {
     throw new Error("DATABASE_URL is not set");
   }
   return new PrismaClient().$extends(withAccelerate());
