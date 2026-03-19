@@ -1,13 +1,12 @@
 // Cloudflare Workers では WebAssembly が禁止されているため /edge サブパスを使用
 // /edge は Prisma Accelerate（HTTP経由）専用の軽量クライアント（WASM不使用）
 import { PrismaClient } from "@prisma/client/edge";
-import { withAccelerate } from "@prisma/extension-accelerate";
 
 // Cloudflare Edge Runtime 対応: Prisma Accelerate（HTTP経由）を使用
 // DATABASE_URL には prisma://accelerate.prisma.data.net/?api_key=... を設定する
-// ローカル開発も Accelerate 経由が可能（Prisma Console で設定）
 // マイグレーション実行には DIRECT_URL（直接 PostgreSQL 接続）が必要
 //
+// Prisma v7: accelerateUrl オプションで Accelerate を設定する（withAccelerate() 不要）
 // see: https://www.prisma.io/docs/accelerate
 
 // globalThis を使用（global は Edge Runtime で非推奨）
@@ -17,12 +16,12 @@ const globalForPrisma = globalThis as unknown as {
 
 function createPrismaClient() {
   const url = process.env.DATABASE_URL;
-  // デバッグ: DATABASE_URL の先頭10文字だけログ出力（prisma:// で始まるか確認）
-  console.log("[prisma] DATABASE_URL prefix:", url ? url.substring(0, 15) + "..." : "EMPTY/UNDEFINED");
   if (!url) {
     throw new Error("DATABASE_URL is not set");
   }
-  return new PrismaClient().$extends(withAccelerate());
+  // Prisma v7: accelerateUrl オプションで Accelerate 接続を設定
+  // withAccelerate() extension は不要（accelerateUrl が代替）
+  return new PrismaClient({ accelerateUrl: url });
 }
 
 function getPrismaClient(): ReturnType<typeof createPrismaClient> {
