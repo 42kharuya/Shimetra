@@ -1,13 +1,12 @@
-// Cloudflare Workers では WebAssembly が禁止されているため /edge サブパスを使用
-// /edge は Prisma Accelerate（HTTP経由）専用の軽量クライアント（WASM不使用）
-import { PrismaClient } from "@prisma/client/edge";
-
-// Cloudflare Edge Runtime 対応: Prisma Accelerate（HTTP経由）を使用
-// DATABASE_URL には prisma://accelerate.prisma.data.net/?api_key=... を設定する
-// マイグレーション実行には DIRECT_URL（直接 PostgreSQL 接続）が必要
+// Cloudflare Workers 対応: Neon サーバーレスドライバー（HTTP/WebSocket）を使用
+// WASM 不使用のため Cloudflare Workers で動作する
+// DATABASE_URL には Neon のプール接続 URL（postgresql://...?pgbouncer=true）を設定する
+// DIRECT_URL はマイグレーション専用（直接 PostgreSQL 接続）
 //
-// Prisma v7: accelerateUrl オプションで Accelerate を設定する（withAccelerate() 不要）
-// see: https://www.prisma.io/docs/accelerate
+// see: https://neon.tech/docs/guides/prisma#use-connection-pooling
+import { PrismaClient } from "@prisma/client/edge";
+import { PrismaNeon } from "@prisma/adapter-neon";
+import { neonConfig } from "@neondatabase/serverless";
 
 // globalThis を使用（global は Edge Runtime で非推奨）
 const globalForPrisma = globalThis as unknown as {
@@ -15,13 +14,15 @@ const globalForPrisma = globalThis as unknown as {
 };
 
 function createPrismaClient() {
-  const url = process.env.DATABASE_URL;
-  if (!url) {
+  const connectionString = process.env.DATABASE_URL;
+  if (!connectionString) {
     throw new Error("DATABASE_URL is not set");
   }
-  // Prisma v7: accelerateUrl オプションで Accelerate 接続を設定
-  // withAccelerate() extension は不要（accelerateUrl が代替）
-  return new PrismaClient({ accelerateUrl: url });
+  // Cloudflare Workers には WebSocket がグローバルに存在する
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  neonConfig.webSocketConstructor = (globalThis as any).WebSocket;
+  const adapter = new PrismaNeon({ connectionString });
+  return new PrismaClient({ adapter });
 }
 
 function getPrismaClient(): ReturnType<typeof createPrismaClient> {
