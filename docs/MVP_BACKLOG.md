@@ -1,4 +1,4 @@
-# MVP Backlog（就活締切トラッカー）
+# MVP Backlog（〆トラ）
 
 目的: PRD/ADRを「1 Issue=1〜3時間〜半日」で実装可能な粒度に分割する。
 

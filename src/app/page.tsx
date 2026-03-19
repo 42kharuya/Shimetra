@@ -19,7 +19,7 @@ export default function HomePage() {
       <header className="border-b border-slate-100">
         <div className="mx-auto flex max-w-4xl items-center justify-between px-6 py-4">
           <span className="text-lg font-bold text-slate-900">
-            就活締切トラッカー
+            〆トラ
           </span>
           <Link
             href="/login"
@@ -149,7 +149,7 @@ export default function HomePage() {
       </main>
 
       <footer className="border-t border-slate-100 py-8 text-center text-sm text-slate-400">
-        © 2026 就活締切トラッカー
+        © 2026 〆トラ
       </footer>
     </div>
   );

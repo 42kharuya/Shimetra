@@ -41,7 +41,7 @@ export async function POST(req: NextRequest) {
 
     const result = await sendEmail({
       to: email,
-      subject: "【就活締切トラッカー】ログインリンク",
+      subject: "【〆トラ】ログインリンク",
       html: `
         <p>以下のリンクをクリックしてログインしてください。</p>
         <p style="margin:16px 0">

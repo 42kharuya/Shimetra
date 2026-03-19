@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 
 export const metadata: Metadata = {
-  title: "利用規約 | 就活締切トラッカー",
+  title: "利用規約 | 〆トラ",
 };
 
 export default function TermsPage() {
@@ -16,7 +16,7 @@ export default function TermsPage() {
       <section className="mb-6">
         <h2 className="mb-2 font-semibold text-slate-900">第1条（適用）</h2>
         <p>
-          本規約は、就活締切トラッカー（以下「本サービス」）の利用条件を定めるものです。
+          本規約は、〆トラ（以下「本サービス」）の利用条件を定めるものです。
           ユーザーは本規約に同意した上で本サービスをご利用ください。
         </p>
       </section>

@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 
 export const metadata: Metadata = {
-  title: "プライバシーポリシー | 就活締切トラッカー",
+  title: "プライバシーポリシー | 〆トラ",
 };
 
 export default function PrivacyPage() {

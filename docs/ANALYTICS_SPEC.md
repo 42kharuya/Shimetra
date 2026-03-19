@@ -1,4 +1,4 @@
-# Analytics Spec（MVP）：就活締切トラッカー
+# Analytics Spec（MVP）：〆トラ
 
 ## 北極星指標（North Star Metric）
 

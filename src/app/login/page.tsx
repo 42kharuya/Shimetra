@@ -2,7 +2,7 @@ import { Suspense } from "react";
 import LoginForm from "./LoginForm";
 
 export const metadata = {
-  title: "ログイン | 就活締切トラッカー",
+  title: "ログイン | 〆トラ",
 };
 
 export default function LoginPage() {
