@@ -20,7 +20,8 @@ function createPrismaClient() {
   if (!url) {
     throw new Error("DATABASE_URL is not set");
   }
-  return new PrismaClient({ datasourceUrl: url }).$extends(withAccelerate());
+  // Prisma v7: Accelerate 接続には accelerateUrl を使用する
+  return new PrismaClient({ accelerateUrl: url }).$extends(withAccelerate());
 }
 
 function getPrismaClient(): ReturnType<typeof createPrismaClient> {
