@@ -6,7 +6,7 @@ import { useSearchParams } from "next/navigation";
 type Status = "idle" | "loading" | "sent" | "error";
 
 const ERROR_MESSAGES: Record<string, string> = {
-  expired: "リンクが無効または期限切れです。再度送信してください。",
+  expired: "リンクが期限切れです。もう一度メールを送信してください。",
   invalid: "無効なリンクです。再度ログインしてください。",
   server: "サーバーエラーが発生しました。しばらく後にお試しください。",
 };
