@@ -5,7 +5,7 @@
  * テスト戦略:
  *  - session.ts: JWT の生成→検証が往復できるか（DB 不要）
  *  - token.ts: generateToken が 64 文字 hex を返すか（DB 不要）
- *  - consumeMagicLinkToken: DB 依存のため手動確認手順を PR に記載
+ *  - consumeMagicLinkToken: prisma をモック差し替えして reason 区別を検証
  */
 
 // Prisma クライアント初期化前に DATABASE_URL を読み込む
@@ -13,7 +13,8 @@ import "dotenv/config";
 
 import assert from "node:assert/strict";
 import { createSessionToken, verifySessionToken } from "../session";
-import { generateToken } from "../token";
+import { generateToken, consumeMagicLinkToken } from "../token";
+import { prisma } from "@/lib/prisma";
 
 process.env.AUTH_SECRET = "test-secret-for-unit-test-only";
 
@@ -77,6 +78,64 @@ async function runAll() {
 
   await test("generateToken: 呼ぶたびに異なる値を返す", async () => {
     assert.notEqual(generateToken(), generateToken());
+  });
+
+  // ── consumeMagicLinkToken: prisma モック差し替えで reason 区別を検証 ──
+  // prisma.magicLinkToken の findUnique / update を差し替えて DB 不要でテスト
+
+  await test("consumeMagicLinkToken: 存在しないトークン → reason=invalid", async () => {
+    (prisma.magicLinkToken as unknown as { findUnique: unknown }).findUnique =
+      async () => null;
+    const result = await consumeMagicLinkToken("nonexistent-token");
+    assert.equal(result.ok, false);
+    if (!result.ok) assert.equal(result.reason, "invalid");
+  });
+
+  await test("consumeMagicLinkToken: 期限切れトークン → reason=expired", async () => {
+    const expiredRecord = {
+      id: "id-1",
+      email: "test@example.com",
+      token: "some-token",
+      usedAt: null,
+      expiresAt: new Date(Date.now() - 1000), // 1秒前 = 期限切れ
+    };
+    (prisma.magicLinkToken as unknown as { findUnique: unknown }).findUnique =
+      async () => expiredRecord;
+    const result = await consumeMagicLinkToken("some-token");
+    assert.equal(result.ok, false);
+    if (!result.ok) assert.equal(result.reason, "expired");
+  });
+
+  await test("consumeMagicLinkToken: 使用済みトークン → reason=invalid", async () => {
+    const usedRecord = {
+      id: "id-2",
+      email: "test@example.com",
+      token: "used-token",
+      usedAt: new Date(Date.now() - 5000), // 使用済み
+      expiresAt: new Date(Date.now() + 60_000),
+    };
+    (prisma.magicLinkToken as unknown as { findUnique: unknown }).findUnique =
+      async () => usedRecord;
+    const result = await consumeMagicLinkToken("used-token");
+    assert.equal(result.ok, false);
+    if (!result.ok) assert.equal(result.reason, "invalid");
+  });
+
+  await test("consumeMagicLinkToken: 有効なトークン → ok=true かつ email を返す", async () => {
+    const validRecord = {
+      id: "id-3",
+      email: "valid@example.com",
+      token: "valid-token",
+      usedAt: null,
+      expiresAt: new Date(Date.now() + 60_000), // 1分後 = 有効
+    };
+    (prisma.magicLinkToken as unknown as { findUnique: unknown }).findUnique =
+      async () => validRecord;
+    (prisma.magicLinkToken as unknown as { update: unknown }).update =
+      async () => ({ ...validRecord, usedAt: new Date() });
+    const result = await consumeMagicLinkToken("valid-token");
+    assert.equal(result.ok, true);
+    if (result.ok) assert.equal(result.email, "valid@example.com");
   });
 
   console.log(`\n${passed} passed, ${failed} failed\n`);
