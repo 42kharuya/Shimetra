@@ -77,7 +77,6 @@ npm run deploy             # wrangler deploy
 ├─ next.config.js
 ├─ open-next.config.ts        # Cloudflare Workers ビルド設定
 ├─ wrangler.toml              # Cloudflare Workers デプロイ設定（Cron トリガー含む）
-├─ docker-compose.yml         # ローカルDB用（DB は Neon クラウドのため通常不要）
 ├─ prisma/
 │  ├─ schema.prisma
 │  └─ migrations/
