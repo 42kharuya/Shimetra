@@ -160,75 +160,99 @@ export async function findAndDeliverNotifications(): Promise<NotifyResult> {
 
       result.processed++;
 
-      // notification_delivery を upsert（一意制約: deadline_item_id + offset_minutes）
-      // update: {} にして既存レコードは変更しない（重複防止）
-      const delivery = await prisma.notificationDelivery.upsert({
-        where: {
-          uq_notification_deliveries_item_offset: {
+      try {
+        // notification_delivery を upsert（一意制約: deadline_item_id + offset_minutes）
+        // update: {} にして既存レコードは変更しない（重複防止）
+        const delivery = await prisma.notificationDelivery.upsert({
+          where: {
+            uq_notification_deliveries_item_offset: {
+              deadlineItemId: item.id,
+              offsetMinutes,
+            },
+          },
+          create: {
             deadlineItemId: item.id,
             offsetMinutes,
+            scheduledFor,
+            status: "scheduled",
           },
-        },
-        create: {
-          deadlineItemId: item.id,
-          offsetMinutes,
-          scheduledFor,
-          status: "scheduled",
-        },
-        update: {}, // 既存があればそのまま（重複防止）
-      });
-
-      // status=scheduled のもののみ送信（sent/failed はスキップ）
-      if (delivery.status !== "scheduled") {
-        result.skipped++;
-        continue;
-      }
-
-      // メール送信
-      const { subject, html, text } = buildNotificationHtml({
-        companyName: item.companyName,
-        kind: item.kind,
-        deadlineAt: item.deadlineAt,
-        offsetMinutes,
-        appUrl,
-      });
-
-      const sendResult = await sendEmail({
-        to: item.user.email,
-        subject,
-        html,
-        text,
-      });
-
-      if (sendResult.ok) {
-        await prisma.notificationDelivery.update({
-          where: { id: delivery.id },
-          data: {
-            status: "sent",
-            sentAt: now,
-            providerMessageId: sendResult.messageId ?? null,
-          },
+          update: {}, // 既存があればそのまま（重複防止）
         });
-        result.sent++;
-        console.log("[notify] sent", {
-          deadlineItemId: item.id,
+
+        // status=scheduled のもののみ送信（sent/failed はスキップ）
+        if (delivery.status !== "scheduled") {
+          result.skipped++;
+          continue;
+        }
+
+        // メール送信
+        const { subject, html, text } = buildNotificationHtml({
+          companyName: item.companyName,
+          kind: item.kind,
+          deadlineAt: item.deadlineAt,
           offsetMinutes,
+          appUrl,
+        });
+
+        const sendResult = await sendEmail({
           to: item.user.email,
+          subject,
+          html,
+          text,
         });
-      } else {
-        await prisma.notificationDelivery.update({
-          where: { id: delivery.id },
-          data: {
-            status: "failed",
+
+        if (sendResult.ok) {
+          await prisma.notificationDelivery.update({
+            where: { id: delivery.id },
+            data: {
+              status: "sent",
+              sentAt: now,
+              providerMessageId: sendResult.messageId ?? null,
+            },
+          });
+          result.sent++;
+          console.log("[notify] sent", {
+            deadlineItemId: item.id,
+            offsetMinutes,
+            to: item.user.email,
+          });
+        } else {
+          await prisma.notificationDelivery.update({
+            where: { id: delivery.id },
+            data: {
+              status: "failed",
+              error: sendResult.error,
+            },
+          });
+          result.failed++;
+          console.error("[notify] failed", {
+            deadlineItemId: item.id,
+            offsetMinutes,
             error: sendResult.error,
-          },
-        });
+          });
+        }
+      } catch (err) {
+        // upsert / DB更新 / 予期しないエラー: ループを止めずに failed としてカウント
+        const errMsg = err instanceof Error ? err.message : String(err);
         result.failed++;
-        console.error("[notify] failed", {
+        console.error("[notify] unexpected error", {
           deadlineItemId: item.id,
           offsetMinutes,
-          error: sendResult.error,
+          error: errMsg,
         });
+        // upsert 後に例外が発生した場合、DB レコードを failed に更新する（ベストエフォート）
+        try {
+          await prisma.notificationDelivery.updateMany({
+            where: {
+              deadlineItemId: item.id,
+              offsetMinutes,
+              status: "scheduled",
+            },
+            data: { status: "failed", error: errMsg },
+          });
+        } catch {
+          // DB 更新にも失敗した場合はログのみ（処理継続を優先）
+        }
       }
     }
   }

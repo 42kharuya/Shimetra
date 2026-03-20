@@ -17,9 +17,10 @@
  *    -H "Authorization: Bearer <CRON_SECRET>"
  *
  * レスポンス:
- *  { ok: true, result: NotifyResult }   200  正常完了
+ *  { ok: true, result: NotifyResult }   200  全件成功（または全スキップ）
+ *  { ok: true, result: NotifyResult }   207  部分失敗（一部メール送信失敗。failed > 0）
  *  { error: string }                    401  認証失敗
- *  { error: string }                    500  サーバーエラー
+ *  { error: string }                    500  サーバーエラー（予期しない例外）
  *
  * Cloudflare Cron 設定（wrangler.toml）:
  *  [triggers]
@@ -71,7 +72,9 @@ export async function POST(req: NextRequest) {
   try {
     const result = await findAndDeliverNotifications();
     console.log("[cron/notify] 完了", result);
-    return NextResponse.json({ ok: true, result });
+    // 部分失敗（failed > 0）は 207 Multi-Status で返す
+    const status = result.failed > 0 ? 207 : 200;
+    return NextResponse.json({ ok: true, result }, { status });
   } catch (err) {
     const message = err instanceof Error ? err.message : String(err);
     console.error("[cron/notify] エラー:", message);
