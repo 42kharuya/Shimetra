@@ -35,10 +35,16 @@
  *    a. plan="pro", status="active" のユーザーに対して Cron を実行する
  *       → offset_minutes=4320/1440/180 の通知がそれぞれ送信されること
  *
- * 5. 送信失敗テスト
+ * 5. 送信失敗テスト（部分失敗・207 レスポンス確認）
  *    a. EMAIL_PROVIDER=resend かつ無効な RESEND_API_KEY を設定して Cron を実行する
  *       → notification_delivery.status が "failed" になること
  *       → notification_delivery.error にエラーメッセージが入ること
+ *    b. 一部ユーザーへの送信が失敗するシナリオ（複数ユーザーが存在する状態）:
+ *       → HTTP ステータス 207 Multi-Status が返ること
+ *       → レスポンス { ok: true, result: { sent: N, failed: M, ... } } に両カウントが含まれること
+ *       → 成功したユーザーの notification_delivery.status は "sent" のまま変わらないこと
+ *    c. 全件成功の場合:
+ *       → HTTP ステータス 200 が返ること
  *
  * 6. ウィンドウ外スキップテスト
  *    a. deadline_at が 100 時間後のアイテムに対して Cron を実行する
