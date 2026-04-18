@@ -72,6 +72,7 @@ git branch | grep -v "^* main" | grep -v "^  main" | xargs git branch -D
 - 第1〜2段階の学びを前提に、MVP と後回し項目を分ける。
 - 成果物は skill `pm-phase3-prd` と skill `pm-phase3-user-story-map` を使って作る。
 - KPI、対象ユーザー、除外スコープ、未解決事項を省略しない。
+- 成果物は `docs/pm` 配下に作成する（pmディレクトリがなければ新規作成）。
 
 ## 5. 確認とレビュー
 

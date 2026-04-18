@@ -72,6 +72,7 @@ git branch | grep -v "^* main" | grep -v "^  main" | xargs git branch -D
 - 成果物は skill `pm-phase4-wireframe` と skill `pm-phase4-screen-flow-journey-map` を使って作る。
 - 図はテキストで再利用しやすい形式を優先し、低忠実度で素早く更新できる形にする。
 - 主要導線、空状態、エラー状態、初回成功体験を含める。
+- 成果物は `docs/pm` 配下に作成する（pmディレクトリがなければ新規作成）。
 
 ## 5. 確認とレビュー
 

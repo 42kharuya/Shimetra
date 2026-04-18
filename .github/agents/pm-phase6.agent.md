@@ -67,6 +67,7 @@ git branch | grep -v "^* main" | grep -v "^  main" | xargs git branch -D
 - 成果物は skill `pm-phase6-project-roadmap` と skill `pm-phase6-backlog` を使って作る。
 - 依存関係、リスク、MVP到達条件を整理し、すぐ着手できる粒度まで分解する。
 - バックログは成果ベースで優先順位を付け、後工程に丸投げしない。
+- 成果物は `docs/pm` 配下に作成する（pmディレクトリがなければ新規作成）。
 
 ## 5. 確認とレビュー
 

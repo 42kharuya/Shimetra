@@ -73,6 +73,7 @@ git branch | grep -v "^* main" | grep -v "^  main" | xargs git branch -D
 - 成果物は skill `pm-phase2-competitive-analysis` と skill `pm-phase2-mvp-validation-plan` を使って作る。
 - 競合比較では事実と解釈を分け、参照元を残す。
 - 実験計画には成功基準・期間・停止条件を必ず含める。
+- 成果物は `docs/pm` 配下に作成する（pmディレクトリがなければ新規作成）。
 
 ## 5. 確認とレビュー
 
