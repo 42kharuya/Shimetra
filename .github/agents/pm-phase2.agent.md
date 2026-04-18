@@ -1,7 +1,6 @@
 ---
 name: pm-phase2
 description: 第2段階の市場調査と検証を進め、競合分析とMVP検証プランを作成するエージェント。
-tools: ["read", "search", "web", "edit"]
 handoffs:
   - label: Phase 3 へ進む
     agent: pm-phase3

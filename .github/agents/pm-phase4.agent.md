@@ -1,7 +1,6 @@
 ---
 name: pm-phase4
 description: 第4段階の設計とUX検証を進め、ワイヤーフレームと画面遷移・体験フローを整理するエージェント。
-tools: ["read", "search", "edit"]
 handoffs:
   - label: Phase 5 へ進む
     agent: pm-phase5

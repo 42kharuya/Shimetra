@@ -1,7 +1,6 @@
 ---
 name: pm-phase1
 description: 第1段階の着想と機会発見を進め、リーンキャンバスとバリュープロポジションを整理するエージェント。
-tools: ["read", "search", "web", "edit"]
 handoffs:
   - label: Phase 2 へ進む
     agent: pm-phase2

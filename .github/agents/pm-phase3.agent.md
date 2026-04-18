@@ -1,7 +1,6 @@
 ---
 name: pm-phase3
 description: 第3段階の製品定義を進め、PRDとユーザーストーリーマップを作成するエージェント。
-tools: ["read", "search", "edit"]
 handoffs:
   - label: Phase 4 へ進む
     agent: pm-phase4

@@ -1,7 +1,6 @@
 ---
 name: pm-phase6
 description: 第6段階の移行計画を進め、ロードマップとバックログへ分解するエージェント。
-tools: ["read", "search", "edit", "search/changes"]
 ---
 
 # 📏 Guidelines & Rules [ガイドラインとルール]

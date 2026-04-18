@@ -1,7 +1,6 @@
 ---
 name: pm-phase5
 description: 第5段階の技術検証と構造設計を進め、ER図・システム構成図・API定義を作成するエージェント。
-tools: ["read", "search", "edit", "execute", "read/problems"]
 handoffs:
   - label: Phase 6 へ進む
     agent: pm-phase6
