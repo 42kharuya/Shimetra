@@ -1,12 +1,12 @@
 /**
  * マジックリンクトークン管理
  *
- * - トークンは crypto.randomBytes で生成する 64 文字 hex 文字列
+ * - トークンは Web Crypto API（globalThis.crypto）で生成する 64 文字 hex 文字列
+ *   ※ node:crypto は Edge Runtime 非対応のため使用しない
  * - 有効期限: MAGIC_LINK_EXPIRY_MINUTES（デフォルト 30 分）
  * - 使い捨て: 一度使われたトークンは再利用不可
  * - 同一メールの期限切れトークンは作成時にクリーンアップ
  */
-import { randomBytes } from "node:crypto";
 import { prisma } from "@/lib/prisma";
 import { env } from "@/lib/env";
 
@@ -20,9 +20,13 @@ function getExpiryMinutes(): number {
   return env.MAGIC_LINK_EXPIRY_MINUTES;
 }
 
-/** 暗号学的にランダムなトークン文字列を生成 */
+/** 暗号学的にランダムなトークン文字列を生成（Web Crypto API 使用） */
 export function generateToken(): string {
-  return randomBytes(32).toString("hex");
+  const bytes = new Uint8Array(32);
+  crypto.getRandomValues(bytes);
+  return Array.from(bytes)
+    .map((b) => b.toString(16).padStart(2, "0"))
+    .join("");
 }
 
 /**
