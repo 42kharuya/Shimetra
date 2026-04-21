@@ -11,25 +11,25 @@ export function HeroSection() {
   return (
     <section className="mx-auto max-w-5xl px-6 py-24 text-center">
       <h1
-        className="mx-auto max-w-2xl text-4xl font-medium leading-tight sm:text-5xl"
+        className="mx-auto max-w-2xl text-4xl font-bold leading-tight sm:text-5xl"
         style={{
-          color: "#141413",
-          fontFamily: "Georgia, serif",
+          color: "#222222",
           lineHeight: 1.1,
+          letterSpacing: "-0.02em",
         }}
       >
         {hero.heading}
       </h1>
       <p
-        className="mx-auto mt-6 max-w-xl text-lg leading-relaxed"
-        style={{ color: "#5e5d59" }}
+        className="mx-auto mt-6 max-w-xl text-base leading-relaxed"
+        style={{ color: "#6a6a6a", fontWeight: 500 }}
       >
         {hero.subCopy}
       </p>
       <div className="mt-10">
         <LeadCaptureDialog label={hero.ctaLabel} ctaLocation="hero" />
       </div>
-      <p className="mt-4 text-sm" style={{ color: "#87867f" }}>
+      <p className="mt-4 text-sm" style={{ color: "#6a6a6a" }}>
         {hero.note}
       </p>
     </section>

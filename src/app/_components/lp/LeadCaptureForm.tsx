@@ -119,8 +119,8 @@ export function LeadCaptureForm({ onSuccess }: LeadCaptureFormProps) {
     <form onSubmit={handleSubmit} noValidate className="flex flex-col gap-5">
       {/* メールアドレス */}
       <div className="flex flex-col gap-1.5">
-        <label className="text-sm font-medium" style={{ color: "#4d4c48" }}>
-          メールアドレス <span style={{ color: "#b53333" }}>*</span>
+        <label className="text-sm font-medium" style={{ color: "#222222", fontWeight: 600 }}>
+          メールアドレス <span style={{ color: "#c13515" }}>*</span>
         </label>
         <input
           type="email"
@@ -131,26 +131,26 @@ export function LeadCaptureForm({ onSuccess }: LeadCaptureFormProps) {
           autoComplete="email"
           className="w-full rounded-lg border px-4 py-2.5 text-sm outline-none transition-shadow focus:ring-2"
           style={{
-            borderColor: "#e8e6dc",
-            backgroundColor: "#faf9f5",
-            color: "#141413",
+            borderColor: "#dddddd",
+            backgroundColor: "#ffffff",
+            color: "#222222",
           }}
         />
       </div>
 
       {/* 卒業年度 */}
       <div className="flex flex-col gap-1.5">
-        <label className="text-sm font-medium" style={{ color: "#4d4c48" }}>
-          卒業年度 <span style={{ color: "#b53333" }}>*</span>
+        <label className="text-sm font-medium" style={{ color: "#222222", fontWeight: 600 }}>
+          卒業年度 <span style={{ color: "#c13515" }}>*</span>
         </label>
         <select
           value={graduationYear}
           onChange={(e) => setGraduationYear(e.target.value)}
           className="w-full rounded-lg border px-4 py-2.5 text-sm outline-none transition-shadow focus:ring-2"
           style={{
-            borderColor: "#e8e6dc",
-            backgroundColor: "#faf9f5",
-            color: "#141413",
+            borderColor: "#dddddd",
+            backgroundColor: "#ffffff",
+            color: "#222222",
           }}
         >
           {GRADUATION_YEARS.map((y) => (
@@ -163,9 +163,9 @@ export function LeadCaptureForm({ onSuccess }: LeadCaptureFormProps) {
 
       {/* 今の悩み（任意） */}
       <div className="flex flex-col gap-1.5">
-        <label className="text-sm font-medium" style={{ color: "#4d4c48" }}>
+        <label className="text-sm font-medium" style={{ color: "#222222", fontWeight: 600 }}>
           今の悩み{" "}
-          <span className="text-xs font-normal" style={{ color: "#87867f" }}>
+          <span className="text-xs font-normal" style={{ color: "#6a6a6a" }}>
             （任意）
           </span>
         </label>
@@ -176,39 +176,39 @@ export function LeadCaptureForm({ onSuccess }: LeadCaptureFormProps) {
           placeholder="例：自己分析が終わらない、どの業界を見ればいいかわからない…"
           className="w-full rounded-lg border px-4 py-2.5 text-sm outline-none transition-shadow focus:ring-2 resize-none"
           style={{
-            borderColor: "#e8e6dc",
-            backgroundColor: "#faf9f5",
-            color: "#141413",
+            borderColor: "#dddddd",
+            backgroundColor: "#ffffff",
+            color: "#222222",
           }}
         />
       </div>
 
       {/* ヒアリング参加可否（任意） */}
       <div className="flex flex-col gap-2">
-        <span className="text-sm font-medium" style={{ color: "#4d4c48" }}>
+        <span className="text-sm font-medium" style={{ color: "#222222", fontWeight: 600 }}>
           ヒアリング参加可否{" "}
-          <span className="text-xs font-normal" style={{ color: "#87867f" }}>
+          <span className="text-xs font-normal" style={{ color: "#6a6a6a" }}>
             （任意）
           </span>
         </span>
         <div className="flex gap-6">
-          <label className="flex items-center gap-2 cursor-pointer text-sm" style={{ color: "#5e5d59" }}>
+          <label className="flex items-center gap-2 cursor-pointer text-sm" style={{ color: "#222222", fontWeight: 500 }}>
             <input
               type="radio"
               name="hearingOptIn"
               checked={hearingOptIn === true}
               onChange={() => setHearingOptIn(true)}
-              className="accent-current"
+              className="accent-[#ff385c]"
             />
             はい
           </label>
-          <label className="flex items-center gap-2 cursor-pointer text-sm" style={{ color: "#5e5d59" }}>
+          <label className="flex items-center gap-2 cursor-pointer text-sm" style={{ color: "#222222", fontWeight: 500 }}>
             <input
               type="radio"
               name="hearingOptIn"
               checked={hearingOptIn === false}
               onChange={() => setHearingOptIn(false)}
-              className="accent-current"
+              className="accent-[#ff385c]"
             />
             いいえ
           </label>
@@ -217,7 +217,7 @@ export function LeadCaptureForm({ onSuccess }: LeadCaptureFormProps) {
 
       {/* エラー表示 */}
       {error && (
-        <p className="text-sm" style={{ color: "#b53333" }}>
+        <p className="text-sm" style={{ color: "#c13515" }}>
           {error}
         </p>
       )}
@@ -226,8 +226,8 @@ export function LeadCaptureForm({ onSuccess }: LeadCaptureFormProps) {
       <button
         type="submit"
         disabled={pending}
-        className="w-full rounded-lg px-6 py-3 text-sm font-medium transition-opacity hover:opacity-90 disabled:opacity-50"
-        style={{ backgroundColor: "#c96442", color: "#faf9f5" }}
+        className="w-full rounded-lg px-6 py-3 text-sm font-medium transition-[transform,opacity] hover:opacity-90 active:scale-95 disabled:opacity-50"
+        style={{ backgroundColor: "#ff385c", color: "#ffffff" }}
       >
         {pending ? "送信中..." : "登録して案内を受け取る"}
       </button>

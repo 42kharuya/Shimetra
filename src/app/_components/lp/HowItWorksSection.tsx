@@ -7,14 +7,14 @@ export function HowItWorksSection() {
   const { howItWorks } = LP_CONTENT;
 
   return (
-    <section className="py-20" style={{ backgroundColor: "#f5f4ed" }}>
+    <section className="py-20" style={{ backgroundColor: "#ffffff" }}>
       <div className="mx-auto max-w-5xl px-6">
         <h2
-          className="text-center text-3xl font-medium"
+          className="text-center text-3xl font-bold"
           style={{
-            color: "#141413",
-            fontFamily: "Georgia, serif",
+            color: "#222222",
             lineHeight: 1.2,
+            letterSpacing: "-0.02em",
           }}
         >
           {howItWorks.heading}
@@ -23,25 +23,22 @@ export function HowItWorksSection() {
           {howItWorks.steps.map(({ number, label }) => (
             <div
               key={number}
-              className="rounded-2xl p-6"
+              className="rounded-[14px] p-6"
               style={{
-                backgroundColor: "#faf9f5",
-                border: "1px solid #f0eee6",
+                backgroundColor: "#ffffff",
+                border: "1px solid #dddddd",
               }}
             >
               <div
-                className="mb-4 text-3xl font-medium"
-                style={{
-                  color: "#c96442",
-                  fontFamily: "Georgia, serif",
-                }}
+                className="mb-4 text-3xl font-bold"
+                style={{ color: "#ff385c" }}
                 aria-label={`ステップ ${number}`}
               >
                 {number}
               </div>
               <p
                 className="text-base leading-relaxed"
-                style={{ color: "#4d4c48" }}
+                style={{ color: "#222222", fontWeight: 500 }}
               >
                 {label}
               </p>

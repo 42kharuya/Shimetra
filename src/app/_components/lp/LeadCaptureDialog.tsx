@@ -84,8 +84,8 @@ export function LeadCaptureDialog({
     };
   }, [open]);
 
-  const buttonBg = dark ? "#c96442" : "#c96442";
-  const buttonColor = "#faf9f5";
+  // Airbnb: プライマリ CTA は常に Rausch (#ff385c)
+  const buttonColor = "#ffffff";
 
   return (
     <>
@@ -93,8 +93,8 @@ export function LeadCaptureDialog({
       <button
         type="button"
         onClick={handleOpen}
-        className="inline-block rounded-lg px-8 py-3.5 text-base font-medium transition-opacity hover:opacity-90"
-        style={{ backgroundColor: buttonBg, color: buttonColor }}
+        className="inline-block rounded-lg px-8 py-3.5 text-base font-medium transition-[transform,opacity] hover:opacity-90 active:scale-95"
+        style={{ backgroundColor: "#ff385c", color: buttonColor }}
       >
         {label}
       </button>
@@ -103,7 +103,7 @@ export function LeadCaptureDialog({
       {open && (
         <div
           className="fixed inset-0 z-50 flex items-end justify-center sm:items-center p-4"
-          style={{ backgroundColor: "rgba(20,20,19,0.6)" }}
+          style={{ backgroundColor: "rgba(0,0,0,0.6)" }}
           aria-modal="true"
           role="dialog"
           aria-label="先行登録フォーム"
@@ -113,16 +113,19 @@ export function LeadCaptureDialog({
           }}
         >
           <div
-            className="relative w-full max-w-md rounded-2xl p-6 sm:p-8"
-            style={{ backgroundColor: "#faf9f5" }}
+            className="relative w-full max-w-md rounded-[20px] p-6 sm:p-8"
+            style={{
+              backgroundColor: "#ffffff",
+              boxShadow: "rgba(0,0,0,0.02) 0 0 0 1px, rgba(0,0,0,0.04) 0 2px 6px 0, rgba(0,0,0,0.1) 0 4px 8px 0",
+            }}
           >
             {/* 閉じるボタン */}
             <button
               type="button"
               onClick={handleClose}
               aria-label="閉じる"
-              className="absolute right-4 top-4 flex h-8 w-8 items-center justify-center rounded-full text-xl transition-opacity hover:opacity-70"
-              style={{ color: "#87867f" }}
+              className="absolute right-4 top-4 flex h-8 w-8 items-center justify-center rounded-full text-xl transition-[transform,opacity] hover:opacity-70 active:scale-95"
+              style={{ color: "#6a6a6a", backgroundColor: "#f7f7f7" }}
             >
               ×
             </button>
@@ -132,16 +135,16 @@ export function LeadCaptureDialog({
             ) : (
               <>
                 <h2
-                  className="mb-1 text-xl font-medium"
+                  className="mb-1 text-xl font-bold"
                   style={{
-                    color: "#141413",
-                    fontFamily: "Georgia, serif",
+                    color: "#222222",
                     lineHeight: 1.2,
+                    letterSpacing: "-0.01em",
                   }}
                 >
                   登録して案内を受け取る
                 </h2>
-                <p className="mb-6 text-sm" style={{ color: "#87867f" }}>
+                <p className="mb-6 text-sm" style={{ color: "#6a6a6a", fontWeight: 500 }}>
                   正式公開前の先行案内です
                 </p>
                 <LeadCaptureForm onSuccess={handleSuccess} />
