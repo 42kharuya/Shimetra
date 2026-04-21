@@ -1,3 +1,5 @@
+export const runtime = "edge";
+
 import { redirect } from "next/navigation";
 import { getSession } from "@/features/auth/session";
 import { getUserPlan } from "@/features/deadlines/gate";
