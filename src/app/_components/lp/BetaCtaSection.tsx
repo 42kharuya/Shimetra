@@ -11,29 +11,29 @@ export function BetaCtaSection() {
   return (
     <section
       className="py-24 text-center"
-      style={{ backgroundColor: "#141413" }}
+      style={{ backgroundColor: "#222222" }}
     >
       <div className="mx-auto max-w-5xl px-6">
         <h2
-          className="text-3xl font-medium sm:text-4xl"
+          className="text-3xl font-bold sm:text-4xl"
           style={{
-            color: "#faf9f5",
-            fontFamily: "Georgia, serif",
+            color: "#ffffff",
             lineHeight: 1.2,
+            letterSpacing: "-0.02em",
           }}
         >
           {betaCta.heading}
         </h2>
         <p
           className="mx-auto mt-4 max-w-lg text-base leading-relaxed"
-          style={{ color: "#b0aea5" }}
+          style={{ color: "#929292", fontWeight: 500 }}
         >
           {betaCta.body}
         </p>
         <div className="mt-10">
           <LeadCaptureDialog label={betaCta.ctaLabel} ctaLocation="bottom" dark />
         </div>
-        <p className="mt-4 text-sm" style={{ color: "#87867f" }}>
+        <p className="mt-4 text-sm" style={{ color: "#6a6a6a" }}>
           {betaCta.note}
         </p>
       </div>

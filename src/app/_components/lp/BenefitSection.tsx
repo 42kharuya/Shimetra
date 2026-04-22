@@ -7,28 +7,33 @@ export function BenefitSection() {
   const { benefit } = LP_CONTENT;
 
   return (
-    <section className="py-20" style={{ backgroundColor: "#30302e" }}>
+    <section className="py-20" style={{ backgroundColor: "#f7f7f7" }}>
       <div className="mx-auto max-w-5xl px-6">
         <h2
-          className="text-center text-3xl font-medium"
+          className="text-center text-3xl font-bold"
           style={{
-            color: "#faf9f5",
-            fontFamily: "Georgia, serif",
+            color: "#222222",
             lineHeight: 1.2,
+            letterSpacing: "-0.02em",
           }}
         >
           {benefit.heading}
         </h2>
-        <ul className="mx-auto mt-10 max-w-md space-y-5">
+        <ul className="mx-auto mt-10 max-w-md space-y-4">
           {benefit.items.map((item) => (
             <li
               key={item}
-              className="flex items-start gap-3 text-base leading-relaxed"
-              style={{ color: "#b0aea5" }}
+              className="flex items-center gap-3 rounded-[14px] border p-5 text-base"
+              style={{
+                color: "#222222",
+                backgroundColor: "#ffffff",
+                borderColor: "#dddddd",
+                fontWeight: 500,
+              }}
             >
               <span
-                className="mt-0.5 flex-shrink-0"
-                style={{ color: "#c96442" }}
+                className="flex h-6 w-6 flex-shrink-0 items-center justify-center rounded-full text-xs font-bold"
+                style={{ backgroundColor: "#ff385c", color: "#ffffff" }}
                 aria-hidden="true"
               >
                 ✓

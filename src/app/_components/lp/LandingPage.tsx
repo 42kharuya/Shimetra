@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { LP_CONTENT } from "./content";
+import { LpPageViewTracker } from "./LpPageViewTracker";
 import { HeroSection } from "./HeroSection";
 import { ProblemSection } from "./ProblemSection";
 import { HowItWorksSection } from "./HowItWorksSection";
@@ -15,33 +16,35 @@ export function LandingPage() {
   const { hero } = LP_CONTENT;
 
   return (
-    // パーチメント背景 (#f5f4ed)
-    <div className="min-h-screen" style={{ backgroundColor: "#f5f4ed" }}>
+    // Canvas White (#ffffff) — Airbnb デザインシステム準拠
+    <div className="min-h-screen" style={{ backgroundColor: "#ffffff" }}>
       {/* ナビゲーション */}
       <header
         className="sticky top-0 z-10 border-b"
         style={{
-          borderColor: "#f0eee6",
-          backgroundColor: "#f5f4ed",
+          borderColor: "#dddddd",
+          backgroundColor: "#ffffff",
         }}
       >
         <div className="mx-auto flex max-w-5xl items-center justify-between px-6 py-4">
           <span
-            className="text-lg font-medium"
-            style={{ color: "#141413", fontFamily: "Georgia, serif" }}
+            className="text-lg font-semibold"
+            style={{ color: "#222222" }}
           >
             〆トラ
           </span>
           <Link
             href="/login"
-            className="rounded-lg px-4 py-2 text-sm font-medium transition-opacity hover:opacity-80"
-            style={{ backgroundColor: "#c96442", color: "#faf9f5" }}
+            className="rounded-lg px-4 py-2 text-sm font-medium transition-[transform,opacity] hover:opacity-90 active:scale-95"
+            style={{ backgroundColor: "#ff385c", color: "#ffffff" }}
           >
             {hero.ctaLabel}
           </Link>
         </div>
       </header>
 
+      {/* LP 表示イベント計測（UI なし） */}
+      <LpPageViewTracker />
       <main>
         <HeroSection />
         <ProblemSection />
@@ -54,7 +57,7 @@ export function LandingPage() {
       {/* フッター */}
       <footer
         className="border-t py-8 text-center text-sm"
-        style={{ borderColor: "#30302e", backgroundColor: "#141413", color: "#5e5d59" }}
+        style={{ borderColor: "#dddddd", backgroundColor: "#f7f7f7", color: "#6a6a6a" }}
       >
         © 2026 〆トラ
       </footer>

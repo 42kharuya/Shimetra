@@ -1,312 +1,390 @@
-# Design System Inspired by Claude (Anthropic)
+# Design System Inspired by Airbnb
 
 ## 1. Visual Theme & Atmosphere
 
-Claude's interface is a literary salon reimagined as a product page — warm, unhurried, and quietly intellectual. The entire experience is built on a parchment-toned canvas (`#f5f4ed`) that deliberately evokes the feeling of high-quality paper rather than a digital surface. Where most AI product pages lean into cold, futuristic aesthetics, Claude's design radiates human warmth, as if the AI itself has good taste in interior design.
+Airbnb's 2026 design feels like a travel magazine that happens to be an app — pristine white canvases give way to full-bleed photography, and the interface itself disappears so the listings can breathe. The signature Rausch coral-pink (`#ff385c`) is used sparingly but unmistakably: search CTA, active tab indicator, primary action button, the occasional price or wishlist heart. Everything else is a disciplined grayscale, with `#222222` carrying almost every line of text.
 
-The signature move is the custom Anthropic Serif typeface — a medium-weight serif with generous proportions that gives every headline the gravitas of a book title. Combined with organic, hand-drawn-feeling illustrations in terracotta (`#c96442`), black, and muted green, the visual language says "thoughtful companion" rather than "powerful tool." The serif headlines breathe at tight-but-comfortable line-heights (1.10–1.30), creating a cadence that feels more like reading an essay than scanning a product page.
+What makes the system unmistakably Airbnb is how much *faith* it places in content. Property photos are displayed at hero scale, 4:3 with edge-to-edge radius treatment. Category switching happens through a tri-tab picker (Homes / Experiences / Services) that uses 3D rendered illustrated icons (a pitched-roof house, a hot-air balloon, a service bell) — physical, tactile, almost toy-like — paired with crisp `Airbnb Cereal VF` labels. This is the rare consumer product where 3D renders and purely typographic UI coexist without tension.
 
-What makes Claude's design truly distinctive is its warm neutral palette. Every gray has a yellow-brown undertone (`#5e5d59`, `#87867f`, `#4d4c48`) — there are no cool blue-grays anywhere. Borders are cream-tinted (`#f0eee6`, `#e8e6dc`), shadows use warm transparent blacks, and even the darkest surfaces (`#141413`, `#30302e`) carry a barely perceptible olive warmth. This chromatic consistency creates a space that feels lived-in and trustworthy.
+The newest surface is the **Experiences** product line — same chrome, but richer card density, more photography, and a center-anchored booking panel with sticky right-rail pricing. Listing detail pages (both rooms and experiences) follow a tight template: full-bleed hero image grid → overlapping rounded booking card (sticky on scroll) → amenities → reviews (Guest Favorite awards use a big centered `4.81` rating with a laurel-wreath lockup) → map → host profile → disclosures. The rhythm is consistent whether you're booking a room or a yacht tour.
 
 **Key Characteristics:**
-- Warm parchment canvas (`#f5f4ed`) evoking premium paper, not screens
-- Custom Anthropic type family: Serif for headlines, Sans for UI, Mono for code
-- Terracotta brand accent (`#c96442`) — warm, earthy, deliberately un-tech
-- Exclusively warm-toned neutrals — every gray has a yellow-brown undertone
-- Organic, editorial illustrations replacing typical tech iconography
-- Ring-based shadow system (`0px 0px 0px 1px`) creating border-like depth without visible borders
-- Magazine-like pacing with generous section spacing and serif-driven hierarchy
+- Rausch coral-pink (`#ff385c`) as a single-accent brand color, used only for primary CTAs and the search button
+- Full-bleed photography at 4:3 / 16:9 with gentle corner rounding (14–20px) as the primary visual vocabulary
+- 3D rendered category icons paired with typographic tabs — the one place the system allows illustration
+- Circular `50%` icon buttons (back arrow, share, favorite, carousel arrows) scattered throughout
+- `Airbnb Cereal VF` carries every label, from 8px legal footnote to 28px section heading — a single-family system
+- Product-tier color coding: Airbnb Plus (magenta `#92174d`), Airbnb Luxe (deep purple `#460479`), Airbnb (Rausch coral)
+- Guest Favorite award lockup — centered giant rating number between two laurel wreaths, one of the most recognizable moments in the system
+- Sticky booking panel with a price → dates → guests stack, pinned to the right rail on desktop, transforming to a bottom-anchored "Reserve" bar on mobile
+- Sticky bottom mobile navigation (Explore / Wishlists / Log in) with an active-state Rausch tint
 
 ## 2. Color Palette & Roles
 
 ### Primary
-- **Anthropic Near Black** (`#141413`): The primary text color and dark-theme surface — not pure black but a warm, almost olive-tinted dark that's gentler on the eyes. The warmest "black" in any major tech brand.
-- **Terracotta Brand** (`#c96442`): The core brand color — a burnt orange-brown used for primary CTA buttons, brand moments, and the signature accent. Deliberately earthy and un-tech.
-- **Coral Accent** (`#d97757`): A lighter, warmer variant of the brand color used for text accents, links on dark surfaces, and secondary emphasis.
+- **Rausch** (`#ff385c`): The brand's signature coral-pink. CSS variable `--palette-bg-primary-core`. Used for: primary "Reserve" button, search submit button, active tab underline, wishlist heart fill, pricing emphasis. The single highest-visibility color on every page.
 
 ### Secondary & Accent
-- **Error Crimson** (`#b53333`): A deep, warm red for error states — serious without being alarming.
-- **Focus Blue** (`#3898ec`): Standard blue for input focus rings — the only cool color in the entire system, used purely for accessibility.
+- **Deep Rausch** (`#e00b41`): A more saturated variant. CSS variable `--palette-bg-tertiary-core`. Used for pressed/active button states and gradient terminal stops.
+- **Plus Magenta** (`#92174d`): CSS variable `--palette-bg-primary-plus`. The brand color for the Airbnb Plus product tier — a higher-end curated-listing offering.
+- **Luxe Purple** (`#460479`): CSS variable `--palette-bg-primary-luxe`. The brand color for the Airbnb Luxe product tier — villa/estate-level rentals.
+- **Info Blue** (`#428bff`): CSS variable `--palette-text-legal`. Used for legal/informational links (terms, privacy, disclosures) — the only non-monochrome link color in the system.
 
 ### Surface & Background
-- **Parchment** (`#f5f4ed`): The primary page background — a warm cream with a yellow-green tint that feels like aged paper. The emotional foundation of the entire design.
-- **Ivory** (`#faf9f5`): The lightest surface — used for cards and elevated containers on the Parchment background. Barely distinguishable but creates subtle layering.
-- **Pure White** (`#ffffff`): Reserved for specific button surfaces and maximum-contrast elements.
-- **Warm Sand** (`#e8e6dc`): Button backgrounds and prominent interactive surfaces — a noticeably warm light gray.
-- **Dark Surface** (`#30302e`): Dark-theme containers, nav borders, and elevated dark elements — warm charcoal.
-- **Deep Dark** (`#141413`): Dark-theme page background and primary dark surface.
+- **Canvas White** (`#ffffff`): The default page background. Every card, every container, every detail page starts here.
+- **Soft Cloud** (`#f7f7f7`): Subtle subsurface tint used on footer backgrounds, map-view wrappers, and "everything else" sections that want to step back from the primary white.
+- **Hairline Gray** (`#dddddd`): Ubiquitous 1px border color — separates cards, amenity rows, review panels, footer columns. The workhorse of the layout system.
 
 ### Neutrals & Text
-- **Charcoal Warm** (`#4d4c48`): Button text on light warm surfaces — the go-to dark-on-light text.
-- **Olive Gray** (`#5e5d59`): Secondary body text — a distinctly warm medium-dark gray.
-- **Stone Gray** (`#87867f`): Tertiary text, footnotes, and de-emphasized metadata.
-- **Dark Warm** (`#3d3d3a`): Dark text links and emphasized secondary text.
-- **Warm Silver** (`#b0aea5`): Text on dark surfaces — a warm, parchment-tinted light gray.
+- **Ink Black** (`#222222`): CSS variable `--palette-text-primary`. The system's near-black. Every heading, every body paragraph, every nav label, every price. Used for ~90% of all text on a page.
+- **Charcoal** (`#3f3f3f`): CSS variable `--palette-text-focused`. Used in focused-state input text and one-step-down emphasis copy.
+- **Ash Gray** (`#6a6a6a`): CSS variable `--palette-bg-tertiary-hover`. Secondary labels, "Cottage rentals" subtitle-style copy under city names, muted footer links.
+- **Mute Gray** (`#929292`): CSS variable `--palette-text-link-disabled`. Disabled buttons and low-priority metadata.
+- **Stone Gray** (`#c1c1c1`): Tertiary dividers, icon strokes, placeholder avatars.
 
 ### Semantic & Accent
-- **Border Cream** (`#f0eee6`): Standard light-theme border — barely visible warm cream, creating the gentlest possible containment.
-- **Border Warm** (`#e8e6dc`): Prominent borders, section dividers, and emphasized containment on light surfaces.
-- **Border Dark** (`#30302e`): Standard border on dark surfaces — maintains the warm tone.
-- **Ring Warm** (`#d1cfc5`): Shadow ring color for button hover/focus states.
-- **Ring Subtle** (`#dedc01`): Secondary ring variant for lighter interactive surfaces.
-- **Ring Deep** (`#c2c0b6`): Deeper ring for active/pressed states.
+- **Error Red** (`#c13515`): CSS variable `--palette-text-primary-error`. Form validation errors, destructive-action warnings.
+- **Deep Error** (`#b32505`): CSS variable `--palette-text-secondary-error-hover`. Pressed/active variants of error states.
+- **Translucent Black** (`rgba(0, 0, 0, 0.24)`): CSS variable `--palette-text-material-disabled`. Disabled material-style labels.
 
 ### Gradient System
-- Claude's design is **gradient-free** in the traditional sense. Depth and visual richness come from the interplay of warm surface tones, organic illustrations, and light/dark section alternation. The warm palette itself creates a "gradient" effect as the eye moves through cream → sand → stone → charcoal → black sections.
+Airbnb's brand gradient appears sparingly, typically only on the wordmark and the search-button branded moment:
+
+```
+linear-gradient(90deg, #ff385c 0%, #e00b41 50%, #92174d 100%)
+```
+
+This coral → magenta sweep is the "branded moment" — never used as a full surface, only as a narrow pill fill or logo treatment.
 
 ## 3. Typography Rules
 
 ### Font Family
-- **Headline**: `Anthropic Serif`, with fallback: `Georgia`
-- **Body / UI**: `Anthropic Sans`, with fallback: `Arial`
-- **Code**: `Anthropic Mono`, with fallback: `Arial`
+- **Airbnb Cereal VF** (primary and only): The proprietary variable-weight sans-serif that carries the entire system. Fallbacks (in order): `Circular, -apple-system, system-ui, Roboto, Helvetica Neue, sans-serif`.
 
-*Note: These are custom typefaces. For external implementations, Georgia serves as the serif substitute and system-ui/Inter as the sans substitute.*
+Weights observed in the extracted tokens: 500, 600, 700. No 400-regular — the system's "body" weight is 500, which gives every block of text a subtle extra density that reads as confident and deliberate.
+
+OpenType features: `salt` (stylistic alternates) is used on the compact 11px and 14px 600-weight labels — likely for tighter numerals and special-character shaping. No ligature or fractional-numeral features observed.
 
 ### Hierarchy
 
-| Role | Font | Size | Weight | Line Height | Letter Spacing | Notes |
-|------|------|------|--------|-------------|----------------|-------|
-| Display / Hero | Anthropic Serif | 64px (4rem) | 500 | 1.10 (tight) | normal | Maximum impact, book-title presence |
-| Section Heading | Anthropic Serif | 52px (3.25rem) | 500 | 1.20 (tight) | normal | Feature section anchors |
-| Sub-heading Large | Anthropic Serif | 36–36.8px (~2.3rem) | 500 | 1.30 | normal | Secondary section markers |
-| Sub-heading | Anthropic Serif | 32px (2rem) | 500 | 1.10 (tight) | normal | Card titles, feature names |
-| Sub-heading Small | Anthropic Serif | 25–25.6px (~1.6rem) | 500 | 1.20 | normal | Smaller section titles |
-| Feature Title | Anthropic Serif | 20.8px (1.3rem) | 500 | 1.20 | normal | Small feature headings |
-| Body Serif | Anthropic Serif | 17px (1.06rem) | 400 | 1.60 (relaxed) | normal | Serif body text (editorial passages) |
-| Body Large | Anthropic Sans | 20px (1.25rem) | 400 | 1.60 (relaxed) | normal | Intro paragraphs |
-| Body / Nav | Anthropic Sans | 17px (1.06rem) | 400–500 | 1.00–1.60 | normal | Navigation links, UI text |
-| Body Standard | Anthropic Sans | 16px (1rem) | 400–500 | 1.25–1.60 | normal | Standard body, button text |
-| Body Small | Anthropic Sans | 15px (0.94rem) | 400–500 | 1.00–1.60 | normal | Compact body text |
-| Caption | Anthropic Sans | 14px (0.88rem) | 400 | 1.43 | normal | Metadata, descriptions |
-| Label | Anthropic Sans | 12px (0.75rem) | 400–500 | 1.25–1.60 | 0.12px | Badges, small labels |
-| Overline | Anthropic Sans | 10px (0.63rem) | 400 | 1.60 | 0.5px | Uppercase overline labels |
-| Micro | Anthropic Sans | 9.6px (0.6rem) | 400 | 1.60 | 0.096px | Smallest text |
-| Code | Anthropic Mono | 15px (0.94rem) | 400 | 1.60 | -0.32px | Inline code, terminal |
+| Role | Size | Weight | Line Height | Letter Spacing | Notes |
+|------|------|--------|-------------|----------------|-------|
+| Section Heading | 28px / 1.75rem | 700 | 1.43 | 0 | "Inspiration for future getaways" — page-level headings |
+| Subsection Heading | 22px / 1.38rem | 500 | 1.18 | -0.44px | "What this place offers", "Meet the hosts" — content dividers |
+| Card Title | 21px / 1.31rem | 700 | 1.43 | 0 | Review panel headings, card lead titles |
+| Listing Title | 20px / 1.25rem | 600 | 1.20 | -0.18px | "Small Group Yacht Tour, Unlimited Wine & Fruits" — listing headlines on detail pages |
+| Subtitle Bold | 16px / 1.00rem | 600 | 1.25 | 0 | Host name, city name |
+| Body Medium | 16px / 1.00rem | 500 | 1.25 | 0 | Primary body copy on detail pages |
+| Button Large | 16px / 1.00rem | 500 | 1.25 | 0 | "Reserve", "Become a host" |
+| Button Default | 14px / 0.88rem | 500 | 1.29 | 0 | Standard button labels |
+| Link | 14px / 0.88rem | 500 | 1.43 | 0 | Nav links, footer links |
+| Caption Medium | 14px / 0.88rem | 500 | 1.29 | 0 | Metadata, subtitle lines ("Cottage rentals", "Villa rentals") |
+| Caption Bold | 14px / 0.88rem | 600 | 1.43 | 0 | `salt` feature enabled — numeric stats, small-text emphasis |
+| Caption Small | 13px / 0.81rem | 400 | 1.23 | 0 | Review dates, micro-metadata |
+| Micro Default | 12px / 0.75rem | 400 | 1.33 | 0 | Footer disclaimers, legal micro-copy |
+| Micro Bold | 12px / 0.75rem | 700 | 1.33 | 0 | "NEW" pill labels |
+| Badge Uppercase | 11px / 0.69rem | 600 | 1.18 | 0 | `salt` feature — compact category/status badges |
+| Superscript | 8px / 0.50rem | 700 | 1.25 | 0.32px | Uppercase — price footnotes, decimal tails |
 
 ### Principles
-- **Serif for authority, sans for utility**: Anthropic Serif carries all headline content with medium weight (500), giving every heading the gravitas of a published title. Anthropic Sans handles all functional UI text — buttons, labels, navigation — with quiet efficiency.
-- **Single weight for serifs**: All Anthropic Serif headings use weight 500 — no bold, no light. This creates a consistent "voice" across all headline sizes, as if the same author wrote every heading.
-- **Relaxed body line-height**: Most body text uses 1.60 line-height — significantly more generous than typical tech sites (1.4–1.5). This creates a reading experience closer to a book than a dashboard.
-- **Tight-but-not-compressed headings**: Line-heights of 1.10–1.30 for headings are tight but never claustrophobic. The serif letterforms need breathing room that sans-serif fonts don't.
-- **Micro letter-spacing on labels**: Small sans text (12px and below) uses deliberate letter-spacing (0.12px–0.5px) to maintain readability at tiny sizes.
+- **One family, many weights.** Airbnb Cereal VF handles everything from 8px legal to 28px page headings — the visual identity comes from the family itself, not from typeface mixing.
+- **500 is the new 400.** The system's "regular" weight is 500, giving every paragraph a slightly more confident texture than the web default.
+- **Negative tracking on display type only.** Headings 20px+ compress tracking by -0.18 to -0.44px to feel chiseled; body sizes stay at 0 tracking for readability.
+- **Tight line-heights for headlines, generous for body.** Display type runs at 1.18–1.25 (tight); body and caption open up to 1.43 for long-form comfort.
+- **No all-caps except at 8px.** The only uppercase transform in the system is the 8px superscript — everywhere else, sentence case with subtle weight shifts does the work.
+
+### Note on Font Substitutes
+Airbnb Cereal VF is proprietary. The closest open-source substitute is **Circular Std** (still commercial) or **Inter** (free, Google Fonts) with letter-spacing reduced by -0.01em at display sizes. For strict brand fidelity, the documented fallback chain (`Circular, -apple-system, system-ui`) renders acceptably on macOS/iOS where `system-ui` resolves to San Francisco, which has similar proportions.
 
 ## 4. Component Stylings
 
 ### Buttons
 
-**Warm Sand (Secondary)**
-- Background: Warm Sand (`#e8e6dc`)
-- Text: Charcoal Warm (`#4d4c48`)
-- Padding: 0px 12px 0px 8px (asymmetric — icon-first layout)
-- Radius: comfortably rounded (8px)
-- Shadow: ring-based (`#e8e6dc 0px 0px 0px 0px, #d1cfc5 0px 0px 0px 1px`)
-- The workhorse button — warm, unassuming, clearly interactive
+**Primary CTA** ("Reserve", "Search", "Add dates")
+- Background: Rausch `#ff385c`
+- Text: Canvas White `#ffffff`, Airbnb Cereal 500, 16px
+- Padding: ~14px vertical, 24px horizontal
+- Radius: 8px (rectangular) or 50% (circular icon variant)
+- Border: none
+- Active/pressed: `transform: scale(0.92)` plus a 2px `#222222` focus ring at `0 0 0 2px`
 
-**White Surface**
-- Background: Pure White (`#ffffff`)
-- Text: Anthropic Near Black (`#141413`)
-- Padding: 8px 16px 8px 12px
-- Radius: generously rounded (12px)
-- Hover: shifts to secondary background color
-- Clean, elevated button for light surfaces
+**Secondary Button** ("Become a host", outlined tertiary actions)
+- Background: `#ffffff`
+- Text: Ink Black `#222222`, Airbnb Cereal 500, 14–16px
+- Padding: 10px 16px
+- Radius: 20px (pill) or 8px (rectangular)
+- Border: 1px solid Hairline Gray `#dddddd`
 
-**Dark Charcoal**
-- Background: Dark Surface (`#30302e`)
-- Text: Ivory (`#faf9f5`)
-- Padding: 0px 12px 0px 8px
-- Radius: comfortably rounded (8px)
-- Shadow: ring-based (`#30302e 0px 0px 0px 0px, ring 0px 0px 0px 1px`)
-- The inverted variant for dark-on-light emphasis
+**Icon-Only Circular Button** (back arrow, share, favorite, carousel controls)
+- Background: `#f2f2f2` (slightly off-white) or white with 1px translucent black border
+- Icon: `#222222` outline stroke, 16–20px
+- Size: 32–44px diameter
+- Radius: 50%
+- Active/pressed: `transform: scale(0.92)`; subtle 4px white ring `0 0 0 4px rgb(255,255,255)` to separate from colorful photography backgrounds
 
-**Brand Terracotta**
-- Background: Terracotta Brand (`#c96442`)
-- Text: Ivory (`#faf9f5`)
-- Radius: 8–12px
-- Shadow: ring-based (`#c96442 0px 0px 0px 0px, #c96442 0px 0px 0px 1px`)
-- The primary CTA — the only button with chromatic color
+**Disabled Button**
+- Background: `#f2f2f2`
+- Text: Stone Gray `#c1c1c1`
+- Opacity: 0.5
 
-**Dark Primary**
-- Background: Anthropic Near Black (`#141413`)
-- Text: Warm Silver (`#b0aea5`)
-- Padding: 9.6px 16.8px
-- Radius: generously rounded (12px)
-- Border: thin solid Dark Surface (`1px solid #30302e`)
-- Used on dark theme surfaces
+**Pill Tab Button** (category selector "Homes / Experiences / Services")
+- Background: transparent
+- Text: Ink Black `#222222`, Airbnb Cereal 500, 16px
+- Padding: 8px 14px
+- Active state: 2px Ink Black underline beneath the label
+- Paired with a 36–48px 3D-rendered illustrated icon above the label
 
 ### Cards & Containers
-- Background: Ivory (`#faf9f5`) or Pure White (`#ffffff`) on light surfaces; Dark Surface (`#30302e`) on dark
-- Border: thin solid Border Cream (`1px solid #f0eee6`) on light; `1px solid #30302e` on dark
-- Radius: comfortably rounded (8px) for standard cards; generously rounded (16px) for featured; very rounded (32px) for hero containers and embedded media
-- Shadow: whisper-soft (`rgba(0,0,0,0.05) 0px 4px 24px`) for elevated content
-- Ring shadow: `0px 0px 0px 1px` patterns for interactive card states
-- Section borders: `1px 0px 0px` (top-only) for list item separators
+
+**Listing Card** (homepage grid, search results)
+- Background: `#ffffff`
+- Radius: 14px on the image, text sits directly below on transparent background
+- Image: 4:3 aspect ratio, full-bleed, rounded with the same 14px radius
+- Padding: none on the outer container; 12px spacing between image and metadata rows
+- Shadow: none — separation comes from whitespace and the intrinsic radius of the photograph
+- Metadata pattern: City/region on line 1 (16px 600), distance/duration on line 2 (14px 500 Ash Gray), date range on line 3, price row with "per night" at the bottom
+
+**Detail Page Booking Panel** (sticky right rail on room/experience pages)
+- Background: `#ffffff`
+- Radius: 14–20px
+- Border: 1px solid Hairline Gray `#dddddd`
+- Shadow: `rgba(0, 0, 0, 0.02) 0 0 0 1px, rgba(0, 0, 0, 0.04) 0 2px 6px 0, rgba(0, 0, 0, 0.1) 0 4px 8px 0` — a stacked three-layer subtle elevation
+- Padding: 24px
+- Width: ~370px, pinned 120–140px below the viewport top
+- Content: price headline → date picker → guest dropdown → primary CTA → "You won't be charged yet" footnote
+
+**Amenity Grid Card** (on listing detail pages)
+- Background: `#ffffff`
+- Border: 1px solid Hairline Gray `#dddddd` at the row level (not per item)
+- Padding: 16px vertical per amenity row
+- Icon + label pattern: 24px outline icon on the left, 16px 500-weight label on the right
+
+**Review Card** (individual review on detail pages)
+- Background: `#ffffff`, no border
+- Padding: 0 (relies on grid gaps)
+- Content: 40px circular avatar + 16px 600-weight name + 14px 400 Ash Gray date on one row, then 14px 500 body paragraph below
 
 ### Inputs & Forms
-- Text: Anthropic Near Black (`#141413`)
-- Padding: 1.6px 12px (very compact vertical)
-- Border: standard warm borders
-- Focus: ring with Focus Blue (`#3898ec`) border-color — the only cool color moment
-- Radius: generously rounded (12px)
+
+**Search Bar** (primary home page)
+- Background: `#ffffff`
+- Border: 1px solid Hairline Gray `#dddddd` wrapping all three segments (Where / When / Who)
+- Radius: 32px (full pill)
+- Shadow: `rgba(0, 0, 0, 0.04) 0 2px 6px 0` — subtle floating feel
+- Structure: three segments divided by thin vertical dividers, each segment has a 12px 500 label above a 14px 500 placeholder
+- Submit: Rausch circular icon button at the right edge, 48px diameter
+
+**Text Input** (generic forms)
+- Background: `#ffffff`
+- Border: 1px solid Hairline Gray `#dddddd`
+- Radius: 8px
+- Padding: 14px 16px
+- Focus: border switches to Ink Black, adds `0 0 0 2px` black outer ring
+- Error: border switches to `#c13515` (Error Red), helper text uses same color
+
+**Date Picker**
+- Calendar grid: 7-column layout, circular `50%` day cells 40–44px wide
+- Selected range: Ink Black `#222222` background with white numerals
+- Start/end anchors: larger filled circles; middle dates use Soft Cloud `#f7f7f7` tint
 
 ### Navigation
-- Sticky top nav with warm background
-- Logo: Claude wordmark in Anthropic Near Black
-- Links: mix of Near Black (`#141413`), Olive Gray (`#5e5d59`), and Dark Warm (`#3d3d3a`)
-- Nav border: `1px solid #30302e` (dark) or `1px solid #f0eee6` (light)
-- CTA: Terracotta Brand button or White Surface button
-- Hover: text shifts to foreground-primary, no decoration
+
+**Top Nav (Desktop)**
+- Height: ~80px
+- Background: `#ffffff`
+- Left: Airbnb wordmark+logo lockup in Rausch (102×32px)
+- Center: tri-tab category picker (Homes / Experiences / Services) with 36–48px 3D icons stacked above 16px 500 labels; active tab has a 2px Ink Black underline
+- Right: "Become a host" text link, then 32px circular globe (language), then 36px hamburger avatar menu
+- Border-bottom: 1px solid Hairline Gray `#dddddd`
+
+**Top Nav (Mobile)**
+- Single-row search pill occupies full width: "Start your search" placeholder with a small magnifier icon
+- Below: tri-tab category picker persists (Homes / Experiences / Services) — illustrated icons shrink to ~28px
+- Bottom-fixed tab bar: Explore (active state Rausch) / Wishlists / Log in — 24px icons above 12px labels
+
+**Listing Detail Secondary Nav**
+- Sticky horizontal scroll of anchor links (Photos · Amenities · Reviews · Location · Host) appears on scroll past the hero image
+- Height: 56px
+- Border-bottom: 1px solid Hairline Gray
 
 ### Image Treatment
-- Product screenshots showing the Claude chat interface
-- Generous border-radius on media (16–32px)
-- Embedded video players with rounded corners
-- Dark UI screenshots provide contrast against warm light canvas
-- Organic, hand-drawn illustrations for conceptual sections
 
-### Distinctive Components
+- **Primary aspect ratios**: 4:3 for homepage listing grids, 16:9 for experience hero photography, 1:1 for avatars
+- **Radius**: 14px on listing-grid images, 20px on detail-page hero photo frames, `50%` on avatars
+- **Image grid on detail pages**: five-photo grid with a single large-left image (50% width) and four smaller photos in a 2×2 grid on the right, all sharing the 20px outer rounded container
+- **Lazy loading**: heavy use of `loading="lazy"` with blurred placeholder previews
+- **Carousel**: circular 32px arrow buttons overlay the image, centered vertically; dot indicators sit 12px above the bottom edge
 
-**Model Comparison Cards**
-- Opus 4.5, Sonnet 4.5, Haiku 4.5 presented in a clean card grid
-- Each model gets a bordered card with name, description, and capability badges
-- Border Warm (`#e8e6dc`) separation between items
+### Signature Components
 
-**Organic Illustrations**
-- Hand-drawn-feeling vector illustrations in terracotta, black, and muted green
-- Abstract, conceptual rather than literal product diagrams
-- The primary visual personality — no other AI company uses this style
+**Guest Favorite Award Lockup** (featured prominently on high-rated listing detail pages)
+- Centered rating number rendered at 44–56px 700-weight
+- Two hand-drawn laurel-wreath SVG illustrations flanking left and right at ~48px tall
+- Below: "Guest Favorite" label at 12px 700 uppercase with `0.32px` tracking, and a short sub-label at 14px 500 Ash Gray
+- Full-width block, no container border — sits directly on white canvas
 
-**Dark/Light Section Alternation**
-- The page alternates between Parchment light and Near Black dark sections
-- Creates a reading rhythm like chapters in a book
-- Each section feels like a distinct environment
+**Tri-Tab Category Picker** (appears at the top of every browse surface)
+- Three tabs: Homes / Experiences / Services
+- Each tab: 3D-rendered illustrated icon (~48px tall) above 16px 500 label
+- Experiences and Services currently carry a small navy-blue "NEW" pill (12px 700 white text on dark blue) floating top-right of the icon
+- Active tab: 2px Ink Black underline beneath the label
+
+**Inspiration City Grid** (homepage "Inspiration for future getaways")
+- 6-column grid of destination links on desktop, 2-column on mobile
+- Each cell: 16px 600 city name on line 1, 14px 500 Ash Gray rental-type subtitle on line 2 ("Cottage rentals", "Villa rentals")
+- No images — text-only grid
+- Tabbed above by category (Popular / Arts & culture / Beach / Mountains / Outdoors / Things to do / Travel tips & inspiration / Airbnb-friendly apartments) — active tab has 2px underline and weight shift
+
+**Reserve Sticky Card** (listing detail pages)
+- Stays fixed 120px below viewport top on desktop as the user scrolls past the hero
+- Collapses to a full-width bottom bar on mobile with a "From $X / night" label and a Rausch "Reserve" pill
+- Always shows: price headline → date display → guest selector → Rausch CTA → "You won't be charged yet" disclaimer
+
+**Experience Host Card** (experience detail pages)
+- Full-width rounded container with a 3:2 cover photograph at top
+- Host avatar (circular, 56px) overlapping the bottom edge of the cover by 50%
+- Below overlap: host name at 16px 700, host tenure at 14px 500 Ash Gray, small Rausch "Message host" pill button
+- Used as the transition between reviews and the amenities/location block
+
+**"Things to know" Strip** (listing detail pages)
+- 3-column grid of rule/policy blocks (House rules, Safety & property, Cancellation policy)
+- Each column: icon at the top, 16px 600 heading, 14px 500 Ash Gray body, "Show more" link in Ink Black underline
+- Separator: 1px Hairline Gray top and bottom borders on the overall strip
 
 ## 5. Layout Principles
 
 ### Spacing System
-- Base unit: 8px
-- Scale: 3px, 4px, 6px, 8px, 10px, 12px, 16px, 20px, 24px, 30px
-- Button padding: asymmetric (0px 12px 0px 8px) or balanced (8px 16px)
-- Card internal padding: approximately 24–32px
-- Section vertical spacing: generous (estimated 80–120px between major sections)
+- **Base unit**: 8px
+- **Extracted scale**: 2, 3, 4, 5.5, 6, 8, 10, 11, 12, 15, 16, 18.5, 22, 24, 32px — fine-grained with a handful of off-grid values used for pixel-perfect icon alignment
+- **Section padding**: ~48–64px top/bottom on desktop, 24–32px on mobile
+- **Card internal padding**: 24px on booking panels and large cards, 16px on amenity rows, 12px on listing-card metadata
+- **Gutter between listing cards**: 24px desktop, 16px mobile
+- **Between stacked text rows**: 4–8px (very tight — reinforces the "dense information" feel of travel listings)
 
 ### Grid & Container
-- Max container width: approximately 1200px, centered
-- Hero: centered with editorial layout
-- Feature sections: single-column or 2–3 column card grids
-- Model comparison: clean 3-column grid
-- Full-width dark sections breaking the container for emphasis
+- **Max content width**: 1760–1920px on ultra-wide (Airbnb lets the grid breathe farther than most sites); 1280px on most detail pages
+- **Homepage listing grid**: 6 columns at ≥1760px, 5 at ≥1440px, 4 at ≥1128px, 3 at ≥800px, 2 at ≥550px, 1 below
+- **Detail page**: 2-column asymmetric — main content ~58%, sticky booking panel ~36% on the right, ~6% gutter
+- **Footer**: 3-column Support / Hosting / Airbnb
 
 ### Whitespace Philosophy
-- **Editorial pacing**: Each section breathes like a magazine spread — generous top/bottom margins create natural reading pauses.
-- **Serif-driven rhythm**: The serif headings establish a literary cadence that demands more whitespace than sans-serif designs.
-- **Content island approach**: Sections alternate between light and dark environments, creating distinct "rooms" for each message.
+Airbnb is densely informative but never cramped. Whitespace is used to *group* — listing cards have 24px of gutter so each photograph reads as a distinct object, but the metadata under each card uses 4–8px gaps so the price/city/date feels like a single unit. The detail-page booking panel has 24px internal padding, but rows within (date picker, guest selector, CTA) are stacked at 12px — the boundary between the card and the page does more separation work than the content within.
 
 ### Border Radius Scale
-- Sharp (4px): Minimal inline elements
-- Subtly rounded (6–7.5px): Small buttons, secondary interactive elements
-- Comfortably rounded (8–8.5px): Standard buttons, cards, containers
-- Generously rounded (12px): Primary buttons, input fields, nav elements
-- Very rounded (16px): Featured containers, video players, tab lists
-- Highly rounded (24px): Tag-like elements, highlighted containers
-- Maximum rounded (32px): Hero containers, embedded media, large cards
+| Radius | Use |
+|--------|-----|
+| 4px | Inline anchor tags, tag chips |
+| 8px | Text buttons, dropdowns, small utility buttons |
+| 14px | Listing card photography, generic content containers, badges |
+| 20px | Primary rounded buttons (pill shape), large images, booking panel |
+| 32px | Search bar pill, extra-large containers |
+| 50% | All circular icon buttons, all avatars, wishlist hearts — the system's signature round geometry |
 
 ## 6. Depth & Elevation
 
 | Level | Treatment | Use |
 |-------|-----------|-----|
-| Flat (Level 0) | No shadow, no border | Parchment background, inline text |
-| Contained (Level 1) | `1px solid #f0eee6` (light) or `1px solid #30302e` (dark) | Standard cards, sections |
-| Ring (Level 2) | `0px 0px 0px 1px` ring shadows using warm grays | Interactive cards, buttons, hover states |
-| Whisper (Level 3) | `rgba(0,0,0,0.05) 0px 4px 24px` | Elevated feature cards, product screenshots |
-| Inset (Level 4) | `inset 0px 0px 0px 1px` at 15% opacity | Active/pressed button states |
+| 0 | No shadow | Listing cards, body content, text-only sections |
+| 1 | `rgba(0, 0, 0, 0.08) 0 4px 12px` | Active/pressed icon buttons (e.g., back, share, favorite) — subtle lift to indicate interaction |
+| 2 | `rgba(0, 0, 0, 0.02) 0 0 0 1px, rgba(0, 0, 0, 0.04) 0 2px 6px 0, rgba(0, 0, 0, 0.1) 0 4px 8px 0` | Booking panel sticky card, modals, dropdown menus — the system's signature three-layer elevation |
+| Focus Ring | `0 0 0 2px #222222` | Active-state buttons, focused search input |
+| White Separator Ring | `rgb(255, 255, 255) 0 0 0 4px` | Circular buttons overlaid on photographs — a 4px white ring cleanly separates the button from colorful image backgrounds |
 
-**Shadow Philosophy**: Claude communicates depth through **warm-toned ring shadows** rather than traditional drop shadows. The signature `0px 0px 0px 1px` pattern creates a border-like halo that's softer than an actual border — it's a shadow pretending to be a border, or a border that's technically a shadow. When drop shadows do appear, they're extremely soft (0.05 opacity, 24px blur) — barely visible lifts that suggest floating rather than casting.
+Shadow philosophy: Airbnb uses **stacked layered shadows** rather than a single drop. The three-layer booking-panel shadow reads as one cohesive lift but is actually three separate shadows at different opacity/blur values — creating subtle anti-aliasing at the shadow's perimeter that feels premium without being heavy.
 
 ### Decorative Depth
-- **Light/Dark alternation**: The most dramatic depth effect comes from alternating between Parchment (`#f5f4ed`) and Near Black (`#141413`) sections — entire sections shift elevation by changing the ambient light level.
-- **Warm ring halos**: Button and card interactions use ring shadows that match the warm palette — never cool-toned or generic gray.
+- **Photography as depth**: the system relies heavily on full-bleed photography to create visual depth; shadows and gradients are used sparingly so the photographs do the heavy lifting
+- **Laurel wreath lockup**: the Guest Favorite award uses two SVG laurel illustrations that give the otherwise-flat rating number a ceremonial, trophy-like presence
+- **3D rendered category icons**: Homes/Experiences/Services icons have their own soft internal lighting and subtle cast shadows baked into the artwork — the only place the brand allows "dimensional" illustration
 
 ## 7. Do's and Don'ts
 
 ### Do
-- Use Parchment (`#f5f4ed`) as the primary light background — the warm cream tone IS the Claude personality
-- Use Anthropic Serif at weight 500 for all headlines — the single-weight consistency is intentional
-- Use Terracotta Brand (`#c96442`) only for primary CTAs and the highest-signal brand moments
-- Keep all neutrals warm-toned — every gray should have a yellow-brown undertone
-- Use ring shadows (`0px 0px 0px 1px`) for interactive element states instead of drop shadows
-- Maintain the editorial serif/sans hierarchy — serif for content headlines, sans for UI
-- Use generous body line-height (1.60) for a literary reading experience
-- Alternate between light and dark sections to create chapter-like page rhythm
-- Apply generous border-radius (12–32px) for a soft, approachable feel
+- Reserve Rausch `#ff385c` for primary actions and the active-tab indicator — never dilute it with decorative uses.
+- Let photography breathe — 4:3 crops with 14–20px rounded corners, no overlaid text, no gradient scrims.
+- Use Ink Black `#222222` for every text layer below Rausch — this is the system's near-black, never true `#000000`.
+- Pair the tri-tab category picker's 3D illustrated icons with flat typography — don't mix illustration styles within a single surface.
+- Stack three low-opacity shadows (~2%, 4%, 10%) to create the signature booking-panel elevation.
+- Use Hairline Gray `#dddddd` 1px borders for every card-to-card and row-to-row divider.
+- Treat the booking panel as sticky on desktop, collapsing to a bottom-anchored reserve bar on mobile.
+- Use 4–8px spacing within metadata groups and 24px between cards — information density is intentional.
 
 ### Don't
-- Don't use cool blue-grays anywhere — the palette is exclusively warm-toned
-- Don't use bold (700+) weight on Anthropic Serif — weight 500 is the ceiling for serifs
-- Don't introduce saturated colors beyond Terracotta — the palette is deliberately muted
-- Don't use sharp corners (< 6px radius) on buttons or cards — softness is core to the identity
-- Don't apply heavy drop shadows — depth comes from ring shadows and background color shifts
-- Don't use pure white (`#ffffff`) as a page background — Parchment (`#f5f4ed`) or Ivory (`#faf9f5`) are always warmer
-- Don't use geometric/tech-style illustrations — Claude's illustrations are organic and hand-drawn-feeling
-- Don't reduce body line-height below 1.40 — the generous spacing supports the editorial personality
-- Don't use monospace fonts for non-code content — Anthropic Mono is strictly for code
-- Don't mix in sans-serif for headlines — the serif/sans split is the typographic identity
+- Don't introduce secondary accent colors outside the Rausch / Plus Magenta / Luxe Purple product-tier palette.
+- Don't place text inside photographs — captions always sit below the image, never overlaid.
+- Don't use all-caps labels except the single 8px superscript role.
+- Don't round icon buttons to anything other than 50% — circular is the system's signature geometry.
+- Don't add drop shadows to listing cards — they sit on white canvas with no elevation.
+- Don't use gradient backgrounds — the only gradient in the system is a narrow Rausch → magenta sweep on the wordmark.
+- Don't use the 400-regular font weight — Airbnb Cereal's body weight is 500.
+- Don't override Airbnb Cereal VF with a different display face — the system is intentionally single-family.
 
 ## 8. Responsive Behavior
 
 ### Breakpoints
+
+Airbnb declares ~60 breakpoints (design-time artifact from their component library), but the meaningful layout shifts happen at a much smaller set:
+
 | Name | Width | Key Changes |
 |------|-------|-------------|
-| Small Mobile | <479px | Minimum layout, stacked everything, compact typography |
-| Mobile | 479–640px | Single column, hamburger nav, reduced heading sizes |
-| Large Mobile | 640–767px | Slightly wider content area |
-| Tablet | 768–991px | 2-column grids begin, condensed nav |
-| Desktop | 992px+ | Full multi-column layout, expanded nav, maximum hero typography (64px) |
+| Ultra-wide | ≥1760px | 6-column listing grid, 1760–1920px max content width |
+| Desktop XL | 1440–1759px | 5-column grid, full nav visible, sticky right-rail booking panel |
+| Desktop | 1128–1439px | 4-column grid, sticky booking panel persists |
+| Laptop | 1024–1127px | 3–4 column grid, category nav remains horizontal |
+| Tablet | 800–1023px | 3-column grid, global search may collapse to a single-row pill |
+| Small tablet | 550–799px | 2-column grid, booking panel drops to full-width inline block |
+| Mobile | 375–549px | 1-column stacked layout, bottom-fixed tab bar appears (Explore / Wishlists / Log in) |
+| Small mobile | <375px | Edge padding tightens to 16px; category-picker icons shrink to ~28px |
 
 ### Touch Targets
-- Buttons use generous padding (8–16px vertical minimum)
-- Navigation links adequately spaced for thumb navigation
-- Card surfaces serve as large touch targets
-- Minimum recommended: 44x44px
+All interactive elements meet or exceed 44×44px. The circular icon button family is specifically sized 32–44px with 8–12px extended hit-area padding. The Rausch primary Reserve button is ~48px tall. The tri-tab category picker's hit area is the full label-plus-icon rectangle (typically ~64×80px per tab).
 
 ### Collapsing Strategy
-- **Navigation**: Full horizontal nav collapses to hamburger on mobile
-- **Feature sections**: Multi-column → stacked single column
-- **Hero text**: 64px → 36px → ~25px progressive scaling
-- **Model cards**: 3-column → stacked vertical
-- **Section padding**: Reduces proportionally but maintains editorial rhythm
-- **Illustrations**: Scale proportionally, maintain aspect ratios
+- **Nav**: Top nav keeps Airbnb wordmark + tri-tab picker on tablet and above; on mobile the picker slides just below the search pill, and the globe/avatar controls move to a bottom-anchored tab bar.
+- **Search bar**: Three-segment pill (Where / When / Who) with a Rausch circular submit button on desktop; collapses to a single-row "Start your search" pill on mobile, tapping which opens a full-screen search sheet.
+- **Booking panel**: Sticky right-rail on ≥1128px; inline within the main content column between 800–1127px; bottom-fixed "Reserve" pill on <800px.
+- **Listing grid**: Reflows 6 → 5 → 4 → 3 → 2 → 1 columns across breakpoints.
+- **Detail-page image grid**: Five-image layout (1 large + 4 small) on desktop; becomes a swipeable full-bleed carousel on mobile with page-dot indicators.
+- **Footer**: 3-column layout collapses to stacked single-column at <800px.
 
 ### Image Behavior
-- Product screenshots scale proportionally within rounded containers
-- Illustrations maintain quality at all sizes
-- Video embeds maintain 16:9 aspect ratio with rounded corners
-- No art direction changes between breakpoints
+- `loading="lazy"` universal, with blurred `im_w=` URL-parameterized preview thumbs served first
+- Responsive images use Airbnb's `muscache.com` CDN with `im_w` query parameter for width-based delivery (`im_w=240`, `im_w=720`, `im_w=1200`, `im_w=2400`)
+- No art-direction crops — the same image is scaled up/down across breakpoints
+- Carousels auto-advance photo height to maintain a consistent 4:3 ratio regardless of source aspect
 
 ## 9. Agent Prompt Guide
 
 ### Quick Color Reference
-- Brand CTA: "Terracotta Brand (#c96442)"
-- Page Background: "Parchment (#f5f4ed)"
-- Card Surface: "Ivory (#faf9f5)"
-- Primary Text: "Anthropic Near Black (#141413)"
-- Secondary Text: "Olive Gray (#5e5d59)"
-- Tertiary Text: "Stone Gray (#87867f)"
-- Borders (light): "Border Cream (#f0eee6)"
-- Dark Surface: "Dark Surface (#30302e)"
+- Primary CTA: "Rausch (#ff385c)"
+- Page background: "Canvas White (#ffffff)"
+- Subsurface: "Soft Cloud (#f7f7f7)"
+- Heading / body text: "Ink Black (#222222)"
+- Secondary text: "Ash Gray (#6a6a6a)"
+- Border / divider: "Hairline Gray (#dddddd)"
+- Error: "Error Red (#c13515)"
+- Info link: "Info Blue (#428bff)"
+- Luxe tier accent: "Luxe Purple (#460479)"
+- Plus tier accent: "Plus Magenta (#92174d)"
 
 ### Example Component Prompts
-- "Create a hero section on Parchment (#f5f4ed) with a headline at 64px Anthropic Serif weight 500, line-height 1.10. Use Anthropic Near Black (#141413) text. Add a subtitle in Olive Gray (#5e5d59) at 20px Anthropic Sans with 1.60 line-height. Place a Terracotta Brand (#c96442) CTA button with Ivory text, 12px radius."
-- "Design a feature card on Ivory (#faf9f5) with a 1px solid Border Cream (#f0eee6) border and comfortably rounded corners (8px). Title in Anthropic Serif at 25px weight 500, description in Olive Gray (#5e5d59) at 16px Anthropic Sans. Add a whisper shadow (rgba(0,0,0,0.05) 0px 4px 24px)."
-- "Build a dark section on Anthropic Near Black (#141413) with Ivory (#faf9f5) headline text in Anthropic Serif at 52px weight 500. Use Warm Silver (#b0aea5) for body text. Borders in Dark Surface (#30302e)."
-- "Create a button in Warm Sand (#e8e6dc) with Charcoal Warm (#4d4c48) text, 8px radius, and a ring shadow (0px 0px 0px 1px #d1cfc5). Padding: 0px 12px 0px 8px."
-- "Design a model comparison grid with three cards on Ivory surfaces. Each card gets a Border Warm (#e8e6dc) top border, model name in Anthropic Serif at 25px, and description in Olive Gray at 15px Anthropic Sans."
+- "Create a primary Reserve button: Rausch (#ff385c) background, white Airbnb Cereal 500-weight label at 16px, 14px × 24px padding, 8px border-radius, no shadow. On active/pressed add `transform: scale(0.92)` with a 2px Ink Black focus ring (`0 0 0 2px #222222`)."
+- "Build a listing card with a 4:3 full-bleed photograph at 14px border-radius, no container shadow; below the image stack three text rows with 4px gaps: city name at 16px 600 Ink Black, rental type at 14px 500 Ash Gray (#6a6a6a), and price range in 16px 500 Ink Black with a 14px `per night` suffix."
+- "Design a sticky booking panel: white background, 14px border-radius, 1px Hairline Gray (#dddddd) border, 3-layer elevation shadow (`rgba(0,0,0,0.02) 0 0 0 1px, rgba(0,0,0,0.04) 0 2px 6px 0, rgba(0,0,0,0.1) 0 4px 8px 0`), 24px padding, 370px width, pinned 120px below viewport top on desktop. Contents: price headline, date picker, guest dropdown, Rausch primary CTA, and a 12px Ash Gray `You won't be charged yet` disclaimer."
+- "Create a tri-tab category picker: three equal-width tabs labeled Homes, Experiences, Services; each tab has a ~48px 3D-rendered illustrated icon (house, balloon, bell) above a 16px 500 Ink Black label; active tab gets a 2px Ink Black underline; add a small 12px 700 white `NEW` pill on a dark navy background to the top-right of the Experiences and Services icons."
+- "Render the Guest Favorite award lockup: a centered rating number at 52px 700-weight Ink Black, flanked left and right by hand-drawn SVG laurel wreaths at ~48px tall; below, a 12px 700 uppercase `GUEST FAVORITE` label with 0.32px tracking; sub-label at 14px 500 Ash Gray; full-width block sitting directly on white canvas with no container border."
 
 ### Iteration Guide
-1. Focus on ONE component at a time
-2. Reference specific color names — "use Olive Gray (#5e5d59)" not "make it gray"
-3. Always specify warm-toned variants — no cool grays
-4. Describe serif vs sans usage explicitly — "Anthropic Serif for the heading, Anthropic Sans for the label"
-5. For shadows, use "ring shadow (0px 0px 0px 1px)" or "whisper shadow" — never generic "drop shadow"
-6. Specify the warm background — "on Parchment (#f5f4ed)" or "on Near Black (#141413)"
-7. Keep illustrations organic and conceptual — describe "hand-drawn-feeling" style
+When refining existing screens generated with this design system:
+1. Focus on ONE component at a time.
+2. Reference specific color names and hex codes from this document (e.g., "Ink Black #222222", not "dark gray").
+3. Use natural language descriptions alongside measurements ("subtle three-layer elevation" rather than a long shadow string).
+4. Describe the desired "feel" ("magazine-like, photography-first" vs "dense utility").
+5. Always default to Airbnb Cereal VF 500-weight for body and 600–700 for emphasis — never 400.
+6. Keep Rausch pink scarce — if more than one Rausch-colored element appears per viewport, consider whether one should be neutralized.
+
+### Known Gaps
+- **Homepage listing grid cards**: the main property-card grid (the primary visual surface of airbnb.com) was not fully captured in the extracted homepage screenshots — content loaded only partially. Listing Card specs above are inferred from the Inspiration grid structure and Airbnb's broader conventions; confirm exact aspect ratios and metadata hierarchy against the live site before production use.
+- **Experiences category icons**: the 3D illustrated icons for Homes / Experiences / Services are served as raster assets; their exact source-file specifications (SVG vs PNG, rendered pixel dimensions) are not documented here.
+- **Animation and transition timings**: not captured — static extraction scope.
+- **Dark mode**: Airbnb does not ship a native dark mode in the extracted product surfaces; this document describes the single light-mode theme only.
