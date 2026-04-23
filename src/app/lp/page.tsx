@@ -9,11 +9,11 @@ export const metadata: Metadata = {
   title: TITLE,
   description: DESCRIPTION,
   alternates: {
-    canonical: "/lp",
+    canonical: "/",
   },
   openGraph: {
     type: "website",
-    url: "/lp",
+    url: "/",
     title: TITLE,
     description: DESCRIPTION,
     siteName: "〆トラ",
